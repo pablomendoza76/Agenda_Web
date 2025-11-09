@@ -1,0 +1,193 @@
+@use '../../../catalogo/colores' as *;
+@use '../../../catalogo/tipografia' as *;
+
+.precios-section {
+  position: relative;
+  background: $fondo-gris-suave;
+  padding: 5rem 2rem;
+  overflow: hidden;
+
+  /* === FONDO REAL === */
+  .precios-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;
+      mix-blend-mode: normal;
+      filter: none;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  /* === CONTENIDO === */
+  .precios-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1150px;
+    margin: 0 auto;
+    text-align: center;
+
+    .precios-header {
+      margin-bottom: 2.2rem;
+
+      .titulo {
+        color: $rojo-botones;
+        margin-bottom: 0.4rem;
+        font-size: 2.3rem;
+      }
+
+      .subtitulo {
+        color: $texto-secundario;
+        font-size: 1.15rem;
+      }
+    }
+
+    /* === GRID === */
+    .planes-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+
+      .plan-card {
+        background: $fondo-claro;
+        border-radius: 18px;
+        padding: 2rem 2rem;
+        width: 250px; /* MÁS DELGADAS */
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+        text-align: left;
+        border: 1px solid #eee;
+        position: relative;
+
+        /* HOVER: NO AFECTA el badge */
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+        }
+
+        /* === HEADER === */
+        .plan-header {
+          margin-bottom: 0.6rem;
+
+          .plan-nombre {
+            @extend .headline-title-medium;
+            color: $amarillo-texto;
+            font-size: 0.9rem;
+          }
+
+          .plan-precio {
+            @extend .h2-semibold;
+            font-size: 2.2rem;
+            margin: 0.3rem 0 0.3rem 0;
+            color: $texto-principal;
+
+            span {
+              color: $texto-terciario;
+              font-size: 0.85rem;
+            }
+          }
+        }
+
+        hr {
+          border: none;
+          border-bottom: 1px solid $gris-borde;
+          margin: 1.2rem 0;
+        }
+
+        /* === LISTA === */
+        .plan-lista {
+          margin: 1rem 0 2rem;
+          padding: 0;
+          list-style: none;
+
+          li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.9rem;
+            font-size: 0.9rem;
+            color: $texto-secundario;
+
+            i {
+              color: $rojo-botones;
+              font-size: 0.85rem;
+            }
+          }
+        }
+
+        /* === BOTONES === */
+        .btn-free,
+        .btn-pro {
+          width: 100%;
+          padding: 0.7rem 1rem;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          font-weight: 500;
+          cursor: pointer;
+          border: none;
+          transition: 0.25s ease;
+        }
+
+        .btn-free {
+          background: transparent;
+          color: $rojo-botones;
+          border: 1px solid $rojo-botones;
+
+          &:hover {
+            background: $rojo-botones;
+            color: white;
+          }
+        }
+
+        .btn-pro {
+          background: $rojo-botones;
+          color: white;
+
+          &:hover {
+            background: darken($rojo-botones, 10%);
+          }
+        }
+
+        /* === PLAN PRO (destacado) === */
+        &.plan-pro {
+          border: 1.5px solid $rojo-botones;
+
+          .plan-nombre.verde {
+            color: $verde-éxito;
+          }
+
+          /* BADGE FIJO – NO SE MUEVE */
+          .badge {
+            position: absolute;
+            top: -15px;
+            left: 60%;
+            transform: translateX(-50%);
+            background: $rojo-botones;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+            pointer-events: none; /* evita moverse */
+            z-index: 10;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .planes-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

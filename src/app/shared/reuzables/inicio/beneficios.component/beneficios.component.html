@@ -1,0 +1,32 @@
+<section class="beneficios-section">
+  <div class="beneficios-bg">
+    <img src="/img/Services.svg" alt="Fondo beneficios" />
+  </div>
+
+  <div class="beneficios-container">
+    <div class="beneficios-header">
+      <h2 class="h2-semibold titulo">Beneficios Claves</h2>
+      <p class="body-large-regular subtitulo">
+        Todo lo que necesitas para gestionar tu negocio de manera eficiente
+      </p>
+    </div>
+
+    <div class="beneficios-grid">
+      <div
+        class="beneficio-card"
+        *ngFor="let beneficio of beneficios"
+        (mouseenter)="hover = beneficio"
+        (mouseleave)="hover = null"
+        [class.active]="hover === beneficio"
+      >
+        <div class="icono">
+          <i class="fa-regular fa-circle-check"></i>
+        </div>
+        <div class="texto">
+          <h3 class="body-large-semibold">{{ beneficio.titulo }}</h3>
+          <p class="body-regular">{{ beneficio.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

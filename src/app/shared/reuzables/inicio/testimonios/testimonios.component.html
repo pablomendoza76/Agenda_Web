@@ -1,0 +1,46 @@
+<section class="testimonios-section">
+  <div class="testimonios-bg">
+    <img src="/img/testimonios/fondo-ondas.svg" alt="Fondo ondas" />
+  </div>
+
+  <div class="testimonios-container">
+
+    <!-- Encabezado -->
+    <div class="testimonios-header">
+      <h2 class="titulo">
+        Lo que dicen <span>nuestros clientes</span>
+      </h2>
+      <p class="subtitulo">
+        Testimonios reales de profesionales satisfechos
+      </p>
+    </div>
+
+    <!-- GRID DE TESTIMONIOS -->
+    <div class="testimonios-grid">
+      <div class="testimonio-card" *ngFor="let t of testimonios">
+
+        <!-- WRAPPER → evita que el hover mueva el fondo -->
+        <div class="wrapper">
+
+          <div class="estrellas">
+            <i class="fa-solid fa-star" *ngFor="let s of stars"></i>
+          </div>
+
+          <p class="mensaje">“{{ t.mensaje }}”</p>
+
+          <div class="perfil">
+            <img [src]="t.imagen" alt="{{ t.nombre }}" />
+            <div class="info">
+              <p class="nombre">{{ t.nombre }}</p>
+              <p class="cargo">{{ t.cargo }}</p>
+            </div>
+          </div>
+
+        </div>
+        <!-- /wrapper -->
+
+      </div>
+    </div>
+
+  </div>
+</section>

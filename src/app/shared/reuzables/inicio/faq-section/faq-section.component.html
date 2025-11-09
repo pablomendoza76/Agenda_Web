@@ -1,0 +1,39 @@
+<section class="faq-section">
+
+  <!-- Fondo -->
+  <div class="faq-bg">
+    <img src="/img/fondo-calendario.svg" alt="Fondo FAQ">
+  </div>
+
+  <div class="faq-container">
+
+    <!-- ENCABEZADO -->
+    <div class="faq-header">
+      <h2 class="titulo">Preguntas frecuentes</h2>
+      <p class="subtitulo">Resolvem​os tus dudas más comunes</p>
+    </div>
+
+    <!-- LISTA FAQ -->
+    <div class="faq-items">
+
+      <div class="faq-card" 
+           *ngFor="let f of faqs; let i = index"
+           [class.abierto]="i === activo">
+
+        <button class="faq-pregunta" (click)="togglePregunta(i)">
+          <span [class.activo]="i === activo">{{ f.pregunta }}</span>
+
+          <i class="fa-solid fa-chevron-down flecha"
+             [class.rotar]="i === activo"></i>
+        </button>
+
+        <div class="faq-respuesta" *ngIf="i === activo">
+          {{ f.respuesta }}
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

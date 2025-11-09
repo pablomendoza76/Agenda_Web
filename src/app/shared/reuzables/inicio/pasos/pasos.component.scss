@@ -1,0 +1,271 @@
+@use '../../../catalogo/colores' as *;
+@use '../../../catalogo/tipografia' as *;
+
+.pasos-section {
+  padding: 5rem 0;
+  background: $fondo-claro;
+}
+
+/* ========================= */
+/*     ENCABEZADO PASOS      */
+/* ========================= */
+
+.pasos-encabezado {
+  text-align: center;
+  margin: 0 auto 3rem;
+  max-width: 720px;        /* igual a la imagen */
+  padding: 0 1rem;         /* suave en móviles */
+}
+
+.titulo-encabezado {
+  @extend .h2-medium;      /* usa tu fuente oficial */
+  font-size: 2rem;         /* IGUAL al tamaño visual de la imagen */
+  font-weight: 600;
+  color: $texto-principal;
+  margin: 0;
+  letter-spacing: -0.2px;
+  line-height: 1.22;
+
+  span {
+    color: $rojo-botones;
+  }
+}
+
+.subtitulo-encabezado {
+  @extend .body-regular;    /* misma fuente del resto */
+  margin-top: 0.8rem;
+  font-size: 1.05rem;       /* igual al diseño */
+  color: $texto-secundario;
+  line-height: 1.45;
+  letter-spacing: -0.15px;
+}
+
+
+.pasos-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1300px;        /* → MÁS ANCHO GENERAL */
+  margin: auto;
+  gap: 5rem;                /* → SEPARA MÁS LAS DOS COLUMNAS */
+  position: relative;
+}
+
+
+
+/* ===================================================== */
+/*              COLUMNA IZQUIERDA (SCROLL)               */
+/* ===================================================== */
+.pasos-lista {
+  width: 45%;              /* → MÁS ANCHA */
+  min-width: 420px;        /* → EVITA COLAPSO */
+  max-width: 500px;
+
+  height: 430px;           /* → MÁS ALTO PARA VER MÁS DEL PASO 2 */
+  overflow-y: auto;
+  padding-right: .5rem;
+
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
+  /* Scroll invisible */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* PASO */
+.paso-item {
+  scroll-snap-align: start;
+  padding: 1.8rem 0 2rem;
+  border-bottom: none;
+
+  opacity: 0.45;
+  transition: opacity 0.35s ease;
+
+  min-height: 30px;       /* → MÁS ALTO PARA UN SCROLL PERFECTO */
+  display: flex;
+  flex-direction: column;
+}
+
+.paso-item.activo {
+  opacity: 1;
+}
+
+/* BADGE */
+.badge-paso {
+  background: $rojo-botones;
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  width: max-content;
+}
+
+/* TÍTULO */
+.titulo-paso {
+  @extend .h2-medium;
+  color: $texto-principal;
+  margin: 1rem 0 0.5rem;
+}
+
+/* DESCRIPCIÓN */
+.descripcion-paso {
+  @extend .body-regular;
+  color: $texto-secundario;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+/* LISTA */
+.lista-puntos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+    color: $texto-secundario;
+    font-size: 0.92rem;
+
+    .punto-rojo {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: $rojo-botones;
+      flex-shrink: 0;
+    }
+  }
+}
+
+/* ===================================================== */
+/*               COLUMNA DERECHA (IMAGENES)              */
+/* ===================================================== */
+
+.pasos-imagen {
+  width: 55%;
+  min-width: 600px;    /* → IMAGEN MÁS GRANDE */
+}
+
+.pasos-imagen img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  object-fit: cover;
+  display: block;
+}
+
+/* ===================================================== */
+/*             INDICADORES INFERIORES (BARRAS)           */
+/* ===================================================== */
+
+.pasos-indicadores {
+  margin-top: 1.7rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.3rem;
+
+  margin-left: 35rem;   /* ← EXACTAMENTE 4 cm hacia la izquierda */
+}
+
+
+.indicador {
+  width: 130px;       /* → MÁS ANCHOS */
+  height: 8px;        /* → MÁS ALTOS */
+  background: $gris-borde;
+  border-radius: 10px;
+  transition: 0.35s ease;
+  opacity: .4;
+
+  &.activo {
+    background: $rojo-botones;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .pasos-section {
+    padding: 3rem 0;
+  }
+
+  /* ENCABEZADO */
+  .pasos-encabezado {
+    margin-bottom: 2rem;
+    max-width: 90%;
+    padding: 0 1rem;
+  }
+
+  .titulo-encabezado {
+    font-size: 1.6rem;
+  }
+
+  .subtitulo-encabezado {
+    font-size: 0.95rem;
+  }
+
+  /* CONTENEDOR: SE VUELVE COLUMNA */
+  .pasos-container {
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 100%;
+    padding: 0 1.2rem;
+  }
+
+  /* IMAGEN PRIMERO */
+  .pasos-imagen {
+    width: 100% !important;
+    min-width: unset;
+  }
+
+  .pasos-imagen img {
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  /* LISTA DE PASOS DEBAJO DE LA IMAGEN */
+  .pasos-lista {
+    width: 100% !important;
+    min-width: unset;
+    max-width: unset;
+
+    height: 320px;        /* scroll perfecto en móvil */
+    padding-right: 0;
+
+    scroll-snap-type: y mandatory;
+  }
+
+  .paso-item {
+    min-height: 240px;
+    padding: 1.4rem 0 1.6rem;
+  }
+
+  .titulo-paso {
+    font-size: 1.25rem;
+  }
+
+  .descripcion-paso {
+    font-size: 0.95rem;
+  }
+
+  .lista-puntos li {
+    font-size: 0.9rem;
+  }
+
+  /* INDICADORES DEBAJO DE LA IMAGEN Y CENTRADOS */
+  .pasos-indicadores {
+    margin-left: 0 !important;
+    margin-top: 1.4rem;
+    justify-content: center;
+    gap: 0.9rem;
+  }
+
+  .indicador {
+    width: 70px;
+    height: 6px;
+  }
+}

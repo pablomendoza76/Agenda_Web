@@ -1,0 +1,32 @@
+@use '../../shared/catalogo/colores' as *;
+
+.inicio-hero {
+  position: relative;
+  overflow: hidden;
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+  }
+
+  app-hero {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* Espaciado entre secciones */
+.inicio-beneficios,
+.inicio-precios,
+.inicio-testimonios {
+  margin-top: 5rem;
+}

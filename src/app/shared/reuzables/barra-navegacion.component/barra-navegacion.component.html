@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <!-- Logo -->
+  <div class="navbar__logo">
+    <img src="/img/Agenda_Logo_Horizontal.svg" alt="Logo AgendaSof" />
+  </div>
+
+  <!-- Enlaces -->
+  <div class="navbar__center">
+    <ul class="navbar__links">
+      <li><a (click)="scrollTo('beneficios')">Beneficios</a></li>
+      <li><a (click)="scrollTo('precios')">Precios</a></li>
+      <li><a (click)="scrollTo('testimonios')">Testimonios</a></li>
+    </ul>
+
+    <div class="navbar__actions">
+      <a routerLink="/login" class="btn-login">Iniciar Sesión</a>
+    </div>
+  </div>
+</nav>

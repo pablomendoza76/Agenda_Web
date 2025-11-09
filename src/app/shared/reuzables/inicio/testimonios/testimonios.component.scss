@@ -1,0 +1,243 @@
+@use '../../../catalogo/colores' as *;
+@use '../../../catalogo/tipografia' as *;
+
+.testimonios-section {
+  position: relative;
+  background: $fondo-claro;
+  overflow: hidden;
+  padding: 3rem 0;
+
+  /* ========== FONDO TOTALMENTE VISIBLE ========== */
+  .testimonios-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;              /* ← sin opacidad */
+      filter: none;            /* ← sin blur */
+      mix-blend-mode: normal;  /* ← sin mezcla */
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  /* ========== CONTENEDOR ========== */
+  .testimonios-container {
+    position: relative;
+    z-index: 10;               /* encima del fondo */
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+
+    /* ========== ENCABEZADO ========== */
+    .testimonios-header {
+      margin-bottom: 4rem;
+
+      .titulo {
+        @extend .h2-semibold;
+        font-size: 2.4rem;
+        color: $texto-principal;
+        margin-bottom: 0.6rem;
+
+        span {
+          color: $rojo-botones;
+        }
+      }
+
+      .subtitulo {
+        @extend .body-large-regular;
+        color: $texto-secundario;
+        font-size: 1.1rem;
+      }
+    }
+
+    /* ========== GRID TESTIMONIOS ========== */
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+      align-items: start;
+
+      /* ========== TARJETAS INVISIBLES ========== */
+      .testimonio-card {
+        padding: 0;                     /* sin padding */
+        background: transparent;        /* invisible */
+        border-radius: 16px;
+        box-shadow: none;               /* sin sombra */
+        transition: 0.3s ease;
+        cursor: default;
+
+        /* SOLO AL HACER HOVER APARECE LA TARJETA */
+        &:hover {
+          padding: 2rem;
+          background: white;
+          box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+          transform: translateY(-6px);
+        }
+
+        /* ========== ESTRELLAS ========== */
+        .estrellas {
+          color: $amarillo-alerta;
+          font-size: 1.1rem;
+          margin-bottom: 1rem;
+
+          i {
+            margin: 0 2px;
+          }
+        }
+
+        /* ========== MENSAJE ========== */
+        .mensaje {
+          @extend .body-regular;
+          color: $texto-principal;
+          line-height: 1.55;
+          margin-bottom: 1.8rem;
+          font-style: normal;
+        }
+
+        /* ========== PERFIL ========== */
+        .perfil {
+          display: flex;
+          align-items: center;
+          gap: 0.9rem;
+          justify-content: center;
+
+          img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          .info {
+            text-align: left;
+
+            .nombre {
+              color: $texto-principal;
+              font-weight: 600;
+              font-size: 0.95rem;
+            }
+
+            .cargo {
+              color: $texto-terciario;
+              font-size: 0.85rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 992px) {
+    .testimonios-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem !important;
+    }
+  }
+
+ @media (max-width: 650px) {
+
+  .testimonios-section {
+    padding: 3rem 1rem;            /* menos alto y más compacto */
+  }
+
+  .testimonios-container {
+    padding: 0 0.5rem !important;
+  }
+
+  /* ---------- Encabezado ---------- */
+  .testimonios-header {
+    margin-bottom: 2.5rem !important;
+
+    .titulo {
+      font-size: 1.8rem !important;
+      line-height: 1.25;
+    }
+
+    .subtitulo {
+      font-size: 0.95rem !important;
+      margin-top: 0.4rem;
+      line-height: 1.45;
+    }
+  }
+
+  /* ---------- GRID / COLUMNAS ---------- */
+  .testimonios-grid {
+    grid-template-columns: 1fr !important;   /* solo 1 columna */
+    gap: 2rem !important;
+  }
+
+  /* ---------- Tarjetas ---------- */
+  .testimonio-card {
+    padding: 1.4rem 1.2rem !important;       /* en móvil SÍ se ve tarjeta */
+    background: white !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border-radius: 14px;
+
+    /* desactivar hover en móviles */
+    transform: none !important;
+
+    &:hover {
+      padding: 1.4rem 1.2rem !important;
+      background: white !important;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+      transform: none !important;
+    }
+  }
+
+  /* ---------- Estrellas ---------- */
+  .estrellas {
+    font-size: 1rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  /* ---------- Mensaje ---------- */
+  .mensaje {
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 1.2rem !important;
+  }
+
+  /* ---------- Perfil ---------- */
+  .perfil img {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .perfil .nombre {
+    font-size: 0.9rem !important;
+  }
+
+  .perfil .cargo {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ================================================================= */
+/*            EXTRA-SMALL (Teléfonos 360px – 400px)               */
+/* ================================================================= */
+@media (max-width: 420px) {
+
+  .testimonios-section {
+    padding: 2.5rem 0.8rem;
+  }
+
+  .testimonios-header .titulo {
+    font-size: 1.6rem !important;
+  }
+
+  .testimonio-card {
+    padding: 1.2rem 1rem !important;
+  }
+
+  .mensaje {
+    font-size: 0.88rem !important;
+  }
+}
+}

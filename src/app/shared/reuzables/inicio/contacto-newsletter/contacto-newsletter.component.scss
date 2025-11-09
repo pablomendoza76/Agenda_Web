@@ -1,0 +1,198 @@
+@use '../../../catalogo/colores' as *;
+@use '../../../catalogo/tipografia' as *;
+
+/* =============================== */
+/*       SECCIÓN CON FONDO         */
+/* =============================== */
+.contacto-section {
+  text-align: center;
+  padding: 5rem 2rem 6rem;
+  background: url('/img/contact.svg') center/cover no-repeat;
+  background-color: $fondo-claro;
+}
+
+/* TITULO PRINCIPAL */
+.titulo {
+  @extend .h2-semibold;
+  color: $texto-principal;
+  margin-bottom: 2.5rem;
+  font-size: 2.2rem;
+}
+
+/* =============================== */
+/*         TARJETAS CONTACTO       */
+/* =============================== */
+.contacto-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  perspective: 1400px;
+}
+
+.card-contacto {
+  background: white;
+  padding: 1.8rem 2.4rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: 260px;
+  transform-style: preserve-3d;
+  transition: transform 0.45s ease, box-shadow 0.3s ease;
+
+  /* Estado final después del primer giro */
+  &.girado {
+    transform: rotateY(0deg);
+  }
+
+  /* Evita bugs durante la animación */
+  &.girando {
+    pointer-events: none !important;
+  }
+
+  /* GIRO ÚNICO */
+  &:not(.girado):not(.girando):hover {
+    animation: giroUnico 0.9s ease forwards;
+  }
+
+  /* Hover normal después del giro */
+  &.girado:hover {
+    transform: translateY(-4px) rotateY(3deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+
+  .icono {
+    width: 70px;
+    height: 70px;
+    background: $rojo-botones;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+  }
+
+  .texto {
+    @extend .body-regular;
+    color: $texto-principal;
+    font-size: 0.95rem;
+  }
+}
+
+/* GIRO REAL UNA SOLA VEZ */
+@keyframes giroUnico {
+  0%   { transform: rotateY(0deg); }
+  45%  { transform: rotateY(90deg) scale(1.05); }
+  100% { transform: rotateY(0deg); }
+}
+
+/* =============================== */
+/*             NEWSLETTER          */
+/* =============================== */
+.newsletter {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  padding: 0 1rem;
+
+  .titulo-news {
+    @extend .h3-semibold;
+    color: $texto-principal;
+    font-size: 1.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .descripcion {
+    @extend .body-regular;
+    color: $texto-secundario;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+}
+
+/* =============================== */
+/*            FORMULARIO           */
+/* =============================== */
+
+input[type="email"] {
+  border: 1px solid $gris-borde;
+  padding: 0.85rem;
+  border-radius: 10px;
+  width: 100%;
+  font-family: $font-work-sans;
+  font-size: 0.92rem;
+  margin-bottom: 1.4rem;  /* MÁS SEPARACIÓN */
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: $texto-secundario;
+  font-size: 0.9rem;
+  margin-bottom: 1.4rem; /* MÁS SEPARADO */
+
+  input {
+    accent-color: $rojo-botones;
+  }
+}
+
+.btn-news {
+  background: $rojo-botones;
+  color: white;
+  padding: 0.88rem 2rem; /* Más cómodo */
+  border-radius: 40px;
+  border: none;
+  font-family: $font-poppins;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  transition: 0.3s;
+
+  &:hover {
+    background: darken($rojo-botones, 8%);
+    transform: translateY(-2px);
+  }
+}
+
+/* =============================== */
+/*             RESPONSIVE          */
+/* =============================== */
+@media (max-width: 900px) {
+  .contacto-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.7rem;
+  }
+
+  .card-contacto {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 500px) {
+  .contacto-section {
+    padding: 4rem 1.3rem;
+  }
+
+  .card-contacto {
+    padding: 1.5rem 2rem;
+  }
+
+  .icono {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 1.5rem !important;
+  }
+
+  .texto {
+    font-size: 0.85rem !important;
+  }
+}

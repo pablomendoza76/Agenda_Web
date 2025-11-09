@@ -1,0 +1,150 @@
+@use '../../../catalogo/colores' as *;
+@use '../../../catalogo/tipografia' as *;
+
+.faq-section {
+  position: relative;
+  padding: 6rem 0 4rem;
+  background: $fondo-claro;
+  overflow: hidden;
+
+  /* ===== Fondo ===== */
+  .faq-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  /* ===== Contenedor ===== */
+  .faq-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+
+  /* ===== Encabezado ===== */
+  .faq-header {
+    margin-bottom: 3rem;
+
+    .titulo {
+      @extend .h2-semibold;
+      font-size: 2.6rem;
+      color: $texto-principal;
+    }
+
+    .subtitulo {
+      @extend .body-large-regular;
+      color: $texto-secundario;
+      margin-top: 0.5rem;
+      font-size: 1.15rem;
+    }
+  }
+
+  /* ===== TARJETAS FAQ ===== */
+  .faq-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin-top: 1rem;
+  }
+
+  .faq-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.2rem 1.6rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &.abierto {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+  }
+
+  /* Pregunta */
+  .faq-pregunta {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    font-family: $font-work-sans;
+    font-size: 1.1rem;
+    color: $texto-principal;
+    font-weight: 600;
+
+    span.activo {
+      color: $rojo-botones;
+    }
+
+    .flecha {
+      transition: transform 0.3s ease, color 0.3s ease;
+      color: $texto-secundario;
+      font-size: 1rem;
+
+      &.rotar {
+        transform: rotate(180deg);
+        color: $rojo-botones;
+      }
+    }
+  }
+
+  /* Respuesta */
+  .faq-respuesta {
+    margin-top: 0.9rem;
+    text-align: left;
+    color: $texto-secundario;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    animation: mostrar 0.25s ease;
+  }
+
+  @keyframes mostrar {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 4rem 0;
+
+    .faq-header .titulo {
+      font-size: 2rem;
+    }
+
+    .faq-header .subtitulo {
+      font-size: 1rem;
+    }
+
+    .faq-card {
+      padding: 1.1rem 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-section .faq-card {
+    padding: 1rem 1rem;
+  }
+
+  .faq-section .faq-pregunta {
+    font-size: 1rem;
+  }
+}

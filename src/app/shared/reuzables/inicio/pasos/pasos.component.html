@@ -1,0 +1,53 @@
+<section class="pasos-section">
+
+    <div class="pasos-encabezado">
+  <h2 class="titulo-encabezado">
+    Cómo <span>AgendaSof</span> transforma tu negocio
+  </h2>
+
+  <p class="subtitulo-encabezado">
+    Descubre paso a paso cómo nuestra plataforma revoluciona la gestión de citas
+  </p>
+</div>
+
+
+  <div class="pasos-container">
+
+    <!-- COLUMNA IZQUIERDA (SCROLL DE PASOS) -->
+    <div class="pasos-lista" (scroll)="onScroll($event)">
+      <div
+        class="paso-item"
+        *ngFor="let paso of pasos; let i = index"
+        [class.activo]="i === pasoActual"
+      >
+        <span class="badge-paso">Paso {{ i + 1 }}</span>
+
+        <h3 class="titulo-paso">{{ paso.titulo }}</h3>
+        <p class="descripcion-paso">{{ paso.descripcion }}</p>
+
+        <ul class="lista-puntos">
+          <li *ngFor="let punto of paso.puntos">
+            <span class="punto-rojo"></span> {{ punto }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA – IMAGEN -->
+    <div class="pasos-imagen">
+      <img [src]="imagenes[pasoActual]" alt="Paso imagen" />
+    </div>
+
+  </div>
+
+  <!-- INDICADORES -->
+  <div class="pasos-indicadores">
+    <div
+      class="indicador"
+      *ngFor="let img of imagenes; let j = index"
+      [class.activo]="j === pasoActual"
+      (click)="cambiarPaso(j)"
+    ></div>
+  </div>
+
+</section>

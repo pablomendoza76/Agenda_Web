@@ -1,0 +1,149 @@
+@use '../../../catalogo/colores' as *;
+@use '../../../catalogo/tipografia' as *;
+
+.beneficios-section {
+  position: relative;
+  padding: 3.5rem 0;
+  /* ← Antes 6rem, ahora más compacto */
+  background: $fondo-claro;
+  overflow: hidden;
+
+.beneficios-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* AJUSTE FINAL — mostrar la imagen como es */
+    opacity: 1;              /* antes 0.25 */
+    mix-blend-mode: normal;  /* antes multiply */
+    filter: none;            /* antes contrast(120%) */
+
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+
+  .beneficios-container {
+    position: relative;
+    z-index: 5;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    .beneficios-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      /* ← Antes 4rem */
+
+      .titulo {
+        color: $rojo-botones;
+        font-size: 2.2rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .subtitulo {
+        color: $texto-secundario;
+        font-size: 1.05rem;
+      }
+    }
+
+    /* GRID 2 columnas */
+    .beneficios-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 2.5rem;
+      /* ← Menor separación */
+
+      .beneficio-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 1.2rem;
+        /* ← Tarjetas más bajitas */
+        border-radius: 18px;
+        background: white;
+        /* ← AHORA ES BLANCA */
+        transition: all 0.25s ease;
+        cursor: pointer;
+
+        .icono {
+          width: 38px;
+          /* Más grande */
+          height: 38px;
+          border-radius: 50%;
+
+          background: transparent;
+          /* Invisible */
+          border: none;
+          /* Sin borde visible */
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          font-size: 1.8rem;
+          /* Ícono grande */
+          color: $rojo-botones;
+
+          flex-shrink: 0;
+          transition: all 0.25s ease;
+        }
+
+        /* HOVER */
+        .beneficio-card:hover .icono {
+          background: $rojo-botones;
+          /* Círculo rojo */
+          color: white;
+          /* Ícono blanco */
+        }
+
+
+        .texto {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+
+          h3 {
+            margin: 0;
+            color: $texto-principal;
+            font-size: 1rem;
+          }
+
+          p {
+            margin: 0;
+            color: $texto-terciario;
+            font-size: 0.85rem;
+            line-height: 1.3;
+          }
+        }
+
+        /* HOVER — gris suave */
+        &:hover {
+          background: #f3f3f3;
+          transform: translateX(4px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+          .icono {
+            background: $rojo-botones;
+            color: white;
+            border-color: $rojo-botones;
+          }
+        }
+      }
+    }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .beneficios-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1.6rem !important;
+    }
+  }
+}

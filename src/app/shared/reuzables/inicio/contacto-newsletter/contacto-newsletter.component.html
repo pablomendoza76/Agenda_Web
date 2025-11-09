@@ -1,0 +1,68 @@
+<section class="contacto-section">
+
+  <!-- CONTENIDO REAL -->
+  <div class="contacto-content">
+
+    <!-- Título principal -->
+    <h2 class="titulo">Comuníquese con nosotros</h2>
+
+    <!-- TARJETAS DE CONTACTO -->
+    <div class="contacto-grid">
+
+      <!-- Teléfono -->
+      <div class="card-contacto">
+        <div class="icono">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <p class="texto">593– 72726898</p>
+      </div>
+
+      <!-- Email -->
+      <div class="card-contacto">
+        <div class="icono">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <p class="texto">puntopymes&#64;sofpymes.com</p>
+      </div>
+
+      <!-- Instagram -->
+      <div class="card-contacto">
+        <div class="icono">
+          <i class="fa-solid fa-at"></i>
+        </div>
+        <p class="texto">&#64;puntopymes</p>
+      </div>
+
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter">
+
+      <h3 class="titulo-news">¡Mantente al día con AgendaSof!</h3>
+      <p class="descripcion">
+        Suscríbete a nuestro boletín y recibe noticias, actualizaciones y ofertas
+        exclusivas directamente en tu correo.
+      </p>
+
+      <!-- FORMULARIO -->
+      <div class="formulario">
+        <input
+          type="email"
+          placeholder="tucorreo@gmail.com"
+          [(ngModel)]="email"
+        />
+
+        <label class="check">
+          <input type="checkbox" [(ngModel)]="acepta" />
+          <span>Acepto recibir noticias y promociones de AgendaSof</span>
+        </label>
+
+        <button class="btn-news" (click)="suscribirse()">
+          <i class="fa-solid fa-paper-plane"></i> Suscribirse
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>

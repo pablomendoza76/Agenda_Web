@@ -1,0 +1,92 @@
+@use '../../../catalogo/colores' as *;
+@use '../../../catalogo/tipografia' as *;
+
+.para-quien-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $fondo-gris-suave;
+
+  .titulo {
+    color: $texto-principal;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitulo {
+    color: $texto-secundario;
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .tarjetas-grid {
+    max-width: 950px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+
+  .tarjeta {
+    background: $fondo-claro;
+    padding: 1.6rem 1rem;
+    border-radius: 18px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.25s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+
+      .icono {
+        background: $rojo-botones;
+
+        span {
+          color: white !important;
+        }
+      }
+    }
+
+    /* Contenedor del icono más pequeño */
+    .icono {
+      background: $rojo-fondo;
+      width: 52px;
+      height: 52px;
+      padding: 0.6rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.25s ease;
+      margin-bottom: 0.8rem;
+
+      /* ICONO MÁS GRANDE */
+      span {
+        font-size: 38px;
+        color: $rojo-botones;
+        transition: 0.25s ease;
+      }
+    }
+
+    span {
+      color: $texto-principal;
+      font-size: 1rem;
+      margin-top: 0.2rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .tarjetas-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .tarjetas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
