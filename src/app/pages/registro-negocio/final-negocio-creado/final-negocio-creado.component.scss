@@ -1,0 +1,180 @@
+@use '../../../shared/catalogo/colores' as *;
+@use '../../../shared/catalogo/tipografia' as *;
+
+/* === FONDO === */
+.fondo {
+  width: 91.5%;
+  min-height: 100vh;
+  background-image: url('/img/final.svg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5rem 5rem;
+  overflow-x: hidden;
+}
+
+/* === TARJETA === */
+.tarjeta-final {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 22px;
+  padding: 2.4rem 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: $font-work-sans; /* ✔ cuerpo Work Sans */
+  overflow-x: hidden;
+}
+
+/* === ICONO CHECK === */
+.icono-success i {
+  font-size: 4.2rem;
+  color: #2ecc71;
+  margin-bottom: 1.2rem;
+}
+
+/* === TITULOS === */
+.titulo-principal {
+  font-family: $font-poppins; /* ✔ título con Poppins */
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: .4rem;
+}
+
+.subtitulo {
+  font-family: $font-work-sans; /* ✔ subtítulo Work Sans */
+  color: $texto-secundario;
+  margin-bottom: 2.2rem;
+  font-size: 0.95rem;
+}
+
+/* === FORMULARIO === */
+.bloque-form {
+  text-align: left;
+  width: 85%;
+  margin-bottom: 2rem;
+
+  .titulo-mini {
+    font-family: $font-poppins; /* ✔ mini título con Poppins */
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .descripcion {
+    font-family: $font-work-sans; /* ✔ descripción Work Sans */
+    font-size: 0.87rem;
+    color: $texto-secundario;
+    margin-bottom: 1.3rem;
+    line-height: 1.3rem;
+  }
+
+  .label-input {
+    font-family: $font-work-sans; /* ✔ label Work Sans */
+    margin-top: 1.4rem;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    color: $gris-texto;
+    display: block;
+  }
+
+  .input-icon {
+    position: relative;
+    width: 100%;
+
+    i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+
+    /* === ICONO OJO MÁS SEPARADO === */
+    .icon-right {
+      right: -3rem !important;
+      left: auto;
+      cursor: pointer;
+    }
+
+    .input {
+      font-family: $font-work-sans; /* ✔ inputs con Work Sans */
+      width: 100%;
+      height: 46px;
+      border-radius: 10px;
+      padding: 0 40px;
+      border: 1.5px solid #ddd;
+      font-size: 0.95rem;
+
+      &:focus {
+        border-color: $rojo-botones;
+        box-shadow: 0 0 0 2px rgba($rojo-botones, 0.1);
+        outline: none;
+      }
+
+      /* === PRIMER INPUT (EMAIL) EN GRIS === */
+      &:read-only {
+        background: #f1f1f1;
+        border-color: #dcdcdc;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+/* === BOTÓN PRINCIPAL === */
+.btn-crear {
+  font-family: $font-poppins; /* ✔ botón con Poppins */
+  width: 118%;
+  height: 48px;
+  border-radius: 25px;
+  background: $rojo-botones;
+  color: white;
+  font-weight: 600;
+  border: none;
+
+  margin: 2rem auto 0 auto;
+  display: block;
+
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($rojo-botones, 6%);
+  }
+}
+
+/* === BLOQUE FINAL === */
+.nota-final {
+  width: 93%;
+  margin-top: 1.5rem;
+  background: #f6f6f6;
+  border-radius: 16px;
+  border: 1px solid #e7e7e7;
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  padding: 1.4rem 1.2rem;
+
+  .icon {
+    font-size: 1.35rem;
+    color: $texto-principal;
+  }
+
+  .texto {
+    .titulo {
+      font-family: $font-poppins; /* ✔ título final con Poppins */
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .desc {
+      font-family: $font-work-sans; /* ✔ descripción Work Sans */
+      font-size: 0.86rem;
+      line-height: 1.35rem;
+      color: $texto-secundario;
+    }
+  }
+}

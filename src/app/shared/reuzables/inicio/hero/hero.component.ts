@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule ],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss'],
 })
@@ -23,13 +24,13 @@ export class HeroComponent implements OnInit, OnDestroy {
   layoutActual: string = 'layout-a';
 
   private intervaloCambio!: ReturnType<typeof setInterval>;
-  private indiceInicio = 0; // 🔹 controla la posición de inicio
-  private indiceLayout = 0; // 🔹 controla el layout actual
+  private indiceInicio = 0; // controla la posición de inicio
+  private indiceLayout = 0; // controla el layout actual
 
   ngOnInit(): void {
     this.generarNuevoSet();
 
-    // 🔁 Cambia imágenes + layout cada 1.8 segundos
+    // Cambia imágenes + layout cada 1.8 segundos
     this.intervaloCambio = setInterval(() => {
       this.generarNuevoSet();
     }, 1800);
@@ -40,7 +41,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   private generarNuevoSet(): void {
-    // 🔹 Selecciona 4 imágenes en secuencia circular
+    // Selecciona 4 imágenes en secuencia circular
     const fin = this.indiceInicio + 4;
     if (fin <= this.todasLasImagenes.length) {
       this.imagenesActuales = this.todasLasImagenes.slice(this.indiceInicio, fin);
@@ -51,10 +52,10 @@ export class HeroComponent implements OnInit, OnDestroy {
       this.imagenesActuales = [...parte1, ...parte2];
     }
 
-    // 🔹 Avanza el índice circularmente
+    // Avanza el índice circularmente
     this.indiceInicio = (this.indiceInicio + 1) % this.todasLasImagenes.length;
 
-    // 🔹 Cambia el layout también en secuencia
+    // Cambia el layout también en secuencia
     const layouts = ['layout-a', 'layout-b', 'layout-c', 'layout-d', 'layout-e'];
     this.layoutActual = layouts[this.indiceLayout];
     this.indiceLayout = (this.indiceLayout + 1) % layouts.length;

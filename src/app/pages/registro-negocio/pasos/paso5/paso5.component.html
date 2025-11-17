@@ -1,0 +1,52 @@
+<div class="paso5-container">
+  <form class="formulario">
+
+    <!-- ======================= SUBDOMINIO ======================= -->
+    <!-- CONTENEDOR GRIS COMPLETO -->
+    <div class="wrapper-exterior">
+      <div class="form-group">
+        <label>Tu subdominio único <span class="req">*</span></label>
+
+        <div class="wrapper-interno">
+          <input class="input-sub" type="text" placeholder="Ej. vidasalud" [(ngModel)]="subdominio" name="subdominio"
+            (input)="actualizarURL()" />
+
+          <div class="dominio-fijo">.agendasoft.com</div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ======================= VISTA PREVIA URL ======================= -->
+    <div class="form-group">
+      <label class="label-url">
+        <i class="fa-solid fa-globe"></i>
+        Vista previa de tu URL
+      </label>
+
+      <div class="preview-url">
+        {{ urlPreview }}
+      </div>
+    </div>
+
+    <!-- ======================= CONSEJOS ======================= -->
+    <div class="nota-box">
+      <div class="icono">
+        <i class="fa-solid fa-circle-info"></i>
+      </div>
+
+      <div class="texto">
+        <div class="n-title">Consejos para elegir tu subdominio:</div>
+
+        <ul>
+          <li>Usa el nombre de tu negocio o una versión corta</li>
+          <li>Evita caracteres especiales (solo letras, números y guiones)</li>
+          <li>Mantenlo corto y fácil de recordar</li>
+          <li>Considera incluir tu ubicación si es relevante</li>
+        </ul>
+      </div>
+    </div>
+
+  </form>
+</div>

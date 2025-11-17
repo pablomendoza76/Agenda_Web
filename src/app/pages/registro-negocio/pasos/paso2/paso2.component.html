@@ -1,0 +1,121 @@
+<div class="paso2-container">
+
+  <form class="formulario">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="columna">
+
+      <!-- Tipo de negocio (Dropdown Moderno) -->
+      <div class="form-group">
+        <label>Tipo de negocio <span class="req">*</span></label>
+
+        <div class="dropdown" (click)="toggleDropdown()" [class.open]="dropdownOpen">
+
+          <!-- Valor seleccionado -->
+          <div class="dropdown-selected">
+            {{ form.tipoNegocio ? getLabel(form.tipoNegocio) : 'Selecciona una categoría de negocio' }}
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+
+          <!-- Lista de opciones -->
+          <ul class="dropdown-options" *ngIf="dropdownOpen">
+            <li (click)="selectTipo('salud')">Centro de salud</li>
+            <li (click)="selectTipo('belleza')">Centro de belleza</li>
+            <li (click)="selectTipo('mascotas')">Veterinaria</li>
+            <li (click)="selectTipo('educacion')">Academia / Tutoría</li>
+            <li (click)="selectTipo('otro')">Otro</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RUC -->
+      <div class="form-group">
+        <label>RUC <span class="req">*</span></label>
+        <input
+          type="text"
+          class="input"
+          placeholder="1234567890001"
+          maxlength="13"
+          [(ngModel)]="form.ruc"
+          name="ruc"
+        >
+      </div>
+
+      <!-- Razón social -->
+      <div class="form-group">
+        <label>Razón social <span class="req">*</span></label>
+        <input
+          type="text"
+          class="input"
+          placeholder="Mi Empresa S.A."
+          [(ngModel)]="form.razonSocial"
+          name="razonSocial"
+        >
+      </div>
+
+      <!-- Nombre comercial -->
+      <div class="form-group">
+        <label>Nombre comercial <span class="req">*</span></label>
+        <input
+          type="text"
+          class="input"
+          placeholder="Mi negocio"
+          [(ngModel)]="form.nombreComercial"
+          name="nombreComercial"
+        >
+      </div>
+
+    </div>
+
+    <!-- COLUMNA DERECHA (LOGO) -->
+    <div class="columna">
+
+      <label>Logo del negocio</label>
+
+      <div
+        class="logo-dropzone"
+        (click)="fileInput.click()"
+        (dragover)="onDragOver($event)"
+        (drop)="onDrop($event)"
+      >
+        <img *ngIf="logoPreview" [src]="logoPreview" class="logo-preview"/>
+
+        <div *ngIf="!logoPreview" class="logo-placeholder">
+          <i class="fa-solid fa-image"></i>
+          <p>Arrastra o Busca un archivo</p>
+          <span>Puedes subir archivos de una tamaño máximo de 5 mb</span>
+        </div>
+
+        <input
+          type="file"
+          #fileInput
+          hidden
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        >
+      </div>
+
+      <!-- CONSEJOS -->
+      <div class="tips-box">
+        <p class="tips-title"><i class="fa-solid fa-circle-info"></i> Consejos para tu logo:</p>
+
+        <ul>
+          <li>Usa formato PNG para fondos transparentes</li>
+          <li>Formato cuadrado (1:1) para mejor visualización</li>
+          <li>Resolución mínima recomendada: 200x200 px</li>
+          <li>Tamaño máximo de archivo: 5MB</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </form>
+
+  <!-- NOTA IMPORTANTE -->
+  <div class="nota">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    Asegúrate de que la información coincida exactamente con tus documentos legales.
+  </div>
+
+</div>

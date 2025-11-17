@@ -1,0 +1,150 @@
+@use '../../../../shared/catalogo/colores' as *;
+@use '../../../../shared/catalogo/tipografia' as *;
+
+.paso5-container {
+  background: $fondo-claro;
+  padding: 2rem 2.4rem;
+  border-radius: 14px;
+  max-width: 55%;
+  margin: 0 auto;
+  font-family: $font-work-sans;
+
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+
+    /* ----------------- LABELS ----------------- */
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: $texto-principal;
+
+      .req {
+        color: $rojo-botones;
+      }
+    }
+
+    /* ======================================================
+                     SUBDOMINIO - EXACTO A LA IMAGEN
+    ======================================================= */
+    /* CONTENEDOR GRIS EXTERNO */
+    .wrapper-exterior {
+      background: $gris-fondo;
+      /* gris suave exacto */
+      padding: 2rem 1.5rem;
+      /* deja espacio interno como la imagen */
+      border-radius: 12px;
+      border: 1px solid #e6e6e6;
+      transition: 0.25s;
+
+      &:focus-within {
+        border-color: $rojo-botones;
+        box-shadow: 0 0 0 2px rgba($rojo-botones, .15);
+      }
+    }
+
+    /* CONTENEDOR BLANCO INTERNO (input + dominio) */
+    .wrapper-interno {
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #dfdfdf;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* INPUT */
+    .input-sub {
+      flex: 1;
+      height: 100%;
+      padding: 0 14px;
+      border: none;
+      outline: none;
+      background: white;
+      font-size: .95rem;
+      color: $texto-principal;
+
+      &::placeholder {
+        color: #b8b8b8;
+      }
+    }
+
+    /* DOMINIO FIJO */
+    .dominio-fijo {
+      background: white;
+      height: 100%;
+      padding: 0 14px;
+      border-left: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      font-size: .95rem;
+      color: $texto-secundario;
+    }
+
+
+    /* ======================================================
+                         VISTA PREVIA URL
+    ======================================================= */
+    .label-url {
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      i {
+        color: $rojo-botones;
+        font-size: 1rem;
+      }
+    }
+
+    .preview-url {
+      margin-top: 4px;
+      background: #fff;
+      border: 1px solid #e1e1e1;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-size: 0.95rem;
+      color: $rojo-botones;
+      font-weight: 500;
+    }
+
+    /* ======================================================
+                              NOTA
+    ======================================================= */
+    .nota-box {
+      background: #e8f6ff;
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      display: flex;
+      gap: 1rem;
+
+      .icono {
+        font-size: 1.3rem;
+        color: $azul-informativo;
+      }
+
+      .texto {
+        .n-title {
+          font-weight: 600;
+          font-size: 0.95rem;
+          color: $azul-informativo;
+          margin-bottom: 0.4rem;
+        }
+
+        ul {
+          padding-left: 1.2rem;
+          margin: 0;
+
+          li {
+            font-size: 0.87rem;
+            color: $texto-secundario;
+            margin-bottom: 2px;
+          }
+        }
+      }
+    }
+  }
+}

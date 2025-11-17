@@ -1,0 +1,106 @@
+<div class="paso4-container">
+
+  <form class="formulario">
+
+    <!-- ================= FILA 1: CLASE Y CONTABILIDAD ================= -->
+    <div class="fila">
+      
+      <!-- CLASE -->
+      <div class="grupo-radio">
+        <label class="title-label">Clase</label>
+
+        <div class="radio-box"
+             [class.active]="form.clase === 'otros'"
+             (click)="seleccionarClase('otros')">
+          <div class="radio">
+            <span class="circle" [class.checked]="form.clase === 'otros'"></span>
+          </div>
+          <div class="text">
+            <div class="t1">Otros</div>
+            <div class="t2">Clasificación general</div>
+          </div>
+        </div>
+
+        <div class="radio-box"
+             [class.active]="form.clase === 'especial'"
+             (click)="seleccionarClase('especial')">
+          <div class="radio">
+            <span class="circle" [class.checked]="form.clase === 'especial'"></span>
+          </div>
+          <div class="text">
+            <div class="t1">Especial</div>
+            <div class="t2">Clasificación especializada</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- CONTABILIDAD -->
+      <div class="grupo-radio">
+        <label class="title-label">Contabilidad</label>
+
+        <div class="radio-box"
+             [class.active]="form.contabilidad === 'si'"
+             (click)="seleccionarContabilidad('si')">
+          <div class="radio">
+            <span class="circle" [class.checked]="form.contabilidad === 'si'"></span>
+          </div>
+          <div class="text">
+            <div class="t1">Sí</div>
+            <div class="t2">Mi negocio lleva contabilidad formal</div>
+          </div>
+        </div>
+
+        <div class="radio-box"
+             [class.active]="form.contabilidad === 'no'"
+             (click)="seleccionarContabilidad('no')">
+          <div class="radio">
+            <span class="circle" [class.checked]="form.contabilidad === 'no'"></span>
+          </div>
+          <div class="text">
+            <div class="t1">No</div>
+            <div class="t2">Mi negocio no requiere contabilidad formal</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= FILA 2: RESOLUCIÓN Y ARTESANO ================= -->
+    <div class="fila">
+      <div class="form-group">
+        <label>Resolución</label>
+        <input type="text"
+               class="input"
+               placeholder="000001"
+               [(ngModel)]="form.resolucion"
+               name="resolucion"
+               (input)="guardar()">
+      </div>
+
+      <div class="form-group">
+        <label>Código de artesano</label>
+        <input type="text"
+               class="input"
+               placeholder="Placeholder"
+               [(ngModel)]="form.codigoArtesano"
+               name="codigoArtesano"
+               (input)="guardar()">
+      </div>
+    </div>
+
+    <!-- ================= NOTA ================= -->
+    <div class="nota-box">
+      <div class="icono">ℹ️</div>
+      <div class="texto">
+        <div class="n-title">Nota</div>
+        <div class="n-body">
+          Esta información adicional ayuda a clasificar correctamente tu negocio
+          en el sistema tributario y puede otorgar beneficios fiscales específicos.
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>

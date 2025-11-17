@@ -1,0 +1,187 @@
+@use '../../../../shared/catalogo/colores' as *;
+@use '../../../../shared/catalogo/tipografia' as *;
+
+/* ===========================================
+   CONTENEDOR PRINCIPAL
+=========================================== */
+.step1-container {
+  padding: 1rem 0rem;
+  background: $fondo-claro;
+  border-radius: 14px;
+  max-width: 55%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  font-family: $font-work-sans;
+
+  /* ===========================================
+        PLANES
+  =========================================== */
+  .planes {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .plan-card {
+      flex: 1;
+      min-width: 280px;
+      min-height: 285px;
+      padding: 2.3rem;
+      border-radius: 18px;
+      border: 1.8px solid #e5e5e5;     /* ← borde por defecto */
+      background: #ffffff;             /* ← fondo blanco exacto */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .04);
+      transition: all .25s ease;
+      position: relative;
+      cursor: pointer;
+      text-align: left;
+
+      /* Hover suave (solo movimiento) */
+      &:hover {
+        transform: translateY(-4px);
+      }
+
+      /* ========= ESTADO ACTIVO ========= */
+      &.active {
+        border-color: $rojo-botones;
+        background: #fdecec;           /* ← color idéntico al de la imagen */
+      }
+
+      &.starter.active {
+        background: #fbefef;           /* ← Starter rosa más claro */
+      }
+
+      /* Pro sin seleccionar (borde leve rojo) */
+      &.pro:not(.active) {
+        border-color: rgba($rojo-botones, .35);
+      }
+
+      /* ===========================================
+            HEADER
+      =========================================== */
+      .plan-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: .8rem;
+        position: relative;
+
+        .plan-nombre {
+          @extend .body-large-semibold;
+
+          &.starter { color: $amarillo-texto; }
+          &.pro { color: $verde-texto; }
+        }
+
+        /* radio button */
+        .plan-radio {
+          width: 20px;
+          height: 20px;
+          border: 2.2px solid #d8d8d8;
+          border-radius: 50%;
+          background: white;
+          transition: all .25s ease;
+
+          &.checked {
+            border-color: $rojo-botones;
+            background: radial-gradient(circle, $rojo-botones 55%, white 57%);
+          }
+        }
+
+        /* etiqueta recomendado */
+        .etiqueta-recomendado {
+          position: absolute;
+          top: -4.5rem;
+          left: 55%;
+          transform: translateX(-50%);
+          background: $rojo-botones;
+          color: white;
+          padding: 4px 14px;
+          border-radius: 16px;
+          font-size: .9rem;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+      }
+
+      /* PRECIO */
+      .plan-precio {
+        @extend .h2-semibold;
+        margin: .2rem 0 .8rem;
+
+        .mes {
+          @extend .body-small-regular;
+          color: $texto-secundario;
+        }
+      }
+
+      /* Divider */
+      .plan-divider {
+        height: 1px;
+        background: #e4e4e4;
+        border: 0;
+        margin: 1rem 0;
+      }
+
+      /* Descripción */
+      .descripcion {
+        @extend .body-regular;
+        color: $texto-secundario;
+        line-height: 1.55;
+      }
+    }
+  }
+
+  /* ===========================================
+        DETALLES DE PLANES
+  =========================================== */
+  .detalles {
+    background: #f6f6f6;
+    border-radius: 14px;
+    padding: 1rem 2rem;
+    animation: fadeIn .35s ease;
+
+    h4 {
+      @extend .headline-title-medium;
+      margin-bottom: 1rem;
+    }
+
+    .detalles-lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        @extend .body-regular;
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+
+        i {
+          color: $rojo-botones;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  /* ===========================================
+        NOTA FINAL
+  =========================================== */
+  .nota {
+    background: $verde-fondo;
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    color: $verde-texto;
+  }
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,188 @@
+<div class="paso3-container">
+
+  <form class="formulario">
+
+    <!-- ========================================================= -->
+    <!-- FILA 1: SOLO CORREO ELECTRÓNICO                          -->
+    <!-- ========================================================= -->
+    <div class="fila full">
+      <div class="form-group w-100">
+        <label>Correo electrónico <span class="req">*</span></label>
+
+        <div class="input-icon">
+          <i class="fa-solid fa-envelope"></i>
+          <input
+            class="input"
+            type="email"
+            placeholder="ejemplo@gmail.com"
+            [(ngModel)]="form.correo"
+            name="correo"
+            (input)="guardar()"
+          >
+        </div>
+
+        <small class="help-text">
+          Este correo se usará para la cuenta de administrador
+        </small>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- FILA 2: TELÉFONO MÓVIL – TELÉFONO FIJO                    -->
+    <!-- ========================================================= -->
+    <div class="fila">
+      
+      <!-- Teléfono móvil -->
+      <div class="form-group">
+        <label>Teléfono móvil <span class="req">*</span></label>
+
+        <div class="phone-wrapper">
+          <div class="phone-country" (click)="togglePaisMovil()" [class.open]="dropdownPaisMovil">
+
+            <img class="flag" [src]="paisMovil.flag" />
+            <span class="code">{{ paisMovil.code }}</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+            <ul class="pais-options" *ngIf="dropdownPaisMovil">
+              <li *ngFor="let p of paises" (click)="selectPaisMovil(p)">
+                <img [src]="p.flag" /> {{ p.name }} ({{ p.code }})
+              </li>
+            </ul>
+
+          </div>
+
+          <input
+            class="input phone-input"
+            type="text"
+            maxlength="10"
+            placeholder="Ej. 0998765432"
+            [(ngModel)]="form.telMovil"
+            name="telMovil"
+            (input)="guardar()"
+          >
+        </div>
+      </div>
+
+      <!-- Teléfono fijo -->
+      <div class="form-group">
+        <label>Teléfono fijo</label>
+
+        <div class="phone-wrapper">
+          <div class="phone-country" (click)="togglePaisFijo()" [class.open]="dropdownPaisFijo">
+
+            <img class="flag" [src]="paisFijo.flag" />
+            <span class="code">{{ paisFijo.code }}</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+            <ul class="pais-options" *ngIf="dropdownPaisFijo">
+              <li *ngFor="let p of paises" (click)="selectPaisFijo(p)">
+                <img [src]="p.flag" /> {{ p.name }} ({{ p.code }})
+              </li>
+            </ul>
+
+          </div>
+
+          <input
+            class="input phone-input"
+            type="text"
+            maxlength="9"
+            placeholder="Ej. 072345678"
+            [(ngModel)]="form.telFijo"
+            name="telFijo"
+            (input)="guardar()"
+          >
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- FILA 3: PROVINCIA – CANTÓN                               -->
+    <!-- ========================================================= -->
+    <div class="fila">
+      
+      <!-- Provincia -->
+      <div class="form-group">
+        <label>Provincia <span class="req">*</span></label>
+
+        <div class="dropdown" (click)="toggleProvincia()" [class.open]="dropdownProvincia">
+          <div class="dropdown-selected">
+            {{ form.provincia || 'Seleccione la provincia' }}
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+
+          <ul class="dropdown-options" *ngIf="dropdownProvincia">
+            <li *ngFor="let p of provincias" (click)="selectProvincia(p)">{{ p }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cantón -->
+      <div class="form-group">
+        <label>Cantón <span class="req">*</span></label>
+
+        <div class="dropdown" (click)="toggleCanton()" [class.open]="dropdownCanton">
+          <div class="dropdown-selected">
+            {{ form.canton || 'Seleccione el cantón' }}
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+
+          <ul class="dropdown-options" *ngIf="dropdownCanton">
+            <li *ngFor="let c of cantones" (click)="selectCanton(c)">{{ c }}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- FILA 4: CALLE PRINCIPAL – CALLE SECUNDARIA               -->
+    <!-- ========================================================= -->
+    <div class="fila">
+      
+      <div class="form-group">
+        <label>Calle Principal <span class="req">*</span></label>
+        <input
+          class="input"
+          type="text"
+          placeholder="Ej. Av Benjamín Carrión"
+          [(ngModel)]="form.callePrincipal"
+          name="callePrincipal"
+          (input)="guardar()"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Calle Secundaria <span class="req">*</span></label>
+        <input
+          class="input"
+          type="text"
+          placeholder="Ej. Sucre"
+          [(ngModel)]="form.calleSecundaria"
+          name="calleSecundaria"
+          (input)="guardar()"
+        >
+      </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- FILA 5: REFERENCIA (ANCHO COMPLETO)                      -->
+    <!-- ========================================================= -->
+    <div class="fila full">
+      <div class="form-group w-100">
+        <label>Referencia <span class="req">*</span></label>
+        <input
+          class="input w-100"
+          type="text"
+          placeholder="Ej. Diagonal al parque..."
+          [(ngModel)]="form.referencia"
+          name="referencia"
+          (input)="guardar()"
+        >
+      </div>
+    </div>
+
+  </form>
+
+</div>

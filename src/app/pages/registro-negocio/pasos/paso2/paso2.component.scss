@@ -1,0 +1,226 @@
+@use '../../../../shared/catalogo/colores' as *;
+@use '../../../../shared/catalogo/tipografia' as *;
+
+.paso2-container {
+  background: $fondo-claro;
+  padding: 0rem 2.4rem;
+  border-radius: 14px;
+  max-width: 57%; /* Más ancho como en la imagen */
+  margin: 0 auto;
+  font-family: $font-work-sans;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  /* ===========================
+        FORMULARIO
+  ============================ */
+  .formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.8rem; /* Más aire como en la imagen */
+
+    .columna {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    /* LABEL */
+    .form-group label {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: $texto-principal;
+
+      .req {
+        color: $rojo-botones;
+      }
+    }
+
+    /* ===========================
+        INPUT
+    ============================ */
+    .input {
+  width: 95%;
+  height: 50px;
+  padding: 0 1rem;
+  border-radius: 10px;
+  border: 1.8px solid $gris-borde;
+  background: #fff;
+  font-size: 0.98rem;
+
+  &:focus {
+    outline: none;
+    border-color: $rojo-botones;
+    box-shadow: 0 0 0 3px rgba($rojo-botones, 0.0);
+  }
+}
+
+
+    /* ===========================
+        DROPDOWN
+    ============================ */
+    .dropdown {
+      width: 95%;
+      height: 50px;
+      padding: 0 1rem;
+      border: 1.8px solid $gris-borde;
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &.open {
+        border-color: $rojo-botones;
+      }
+
+      .dropdown-selected {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        i {
+          transition: 0.2s;
+          opacity: 0.7;
+          font-size: 0.95rem;
+        }
+      }
+
+      &.open i {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-options {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        width: 93%;
+        border-radius: 10px;
+        background: white;
+        border: 1px solid $gris-borde;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        overflow: hidden;
+        z-index: 20;
+
+        li {
+          padding: 0.95rem 1rem;
+          cursor: pointer;
+          font-size: 0.95rem;
+          color: $texto-principal;
+
+          &:hover {
+            background: $gris-fondo;
+          }
+        }
+      }
+    }
+
+    /* ===========================
+       DROPZONE - LOGO
+    ============================ */
+    .logo-dropzone {
+      background: #fafafa;
+      border-radius: 12px;
+      border: 2px dashed $gris-borde;
+      height: 210px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.25s;
+
+      &:hover {
+        border-color: $rojo-botones;
+      }
+
+      .logo-preview {
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+      }
+
+      .logo-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.45rem;
+
+        i {
+          font-size: 2.6rem;
+          color: $gris-borde;
+        }
+
+        p {
+          font-weight: 600;
+          margin: 0;
+          color: $texto-principal;
+        }
+
+        span {
+          font-size: 0.78rem;
+          color: $texto-secundario;
+        }
+      }
+    }
+
+    /* ===========================
+        TIPS BOX
+    ============================ */
+    .tips-box {
+      margin-top: 0.6rem;
+      background: #e8f4ff;
+      padding: 1.2rem 1.4rem;
+      border-radius: 12px;
+
+      .tips-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: $azul-informativo;
+        margin-bottom: 0.6rem;
+
+        i {
+          color: $azul-informativo;
+          margin-right: 6px;
+        }
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.3rem;
+
+        li {
+          font-size: 0.9rem;
+          color: $texto-principal;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+
+  /* NOTA IMPORTANTE */
+  .nota {
+    background: $amarillo-fondo;
+    color: $amarillo-texto;
+    padding: 1.1rem 1.4rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+
+    i {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .paso2-container .formulario {
+    grid-template-columns: 1fr;
+  }
+}

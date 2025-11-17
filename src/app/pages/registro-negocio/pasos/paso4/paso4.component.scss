@@ -1,0 +1,172 @@
+@use '../../../../shared/catalogo/colores' as *;
+@use '../../../../shared/catalogo/tipografia' as *;
+
+.paso4-container {
+  background: $fondo-claro;
+  padding: 2rem 2.4rem;
+  border-radius: 14px;
+  max-width: 55%;
+  margin: 0 auto;
+  font-family: $font-work-sans;
+
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    /* ================= FILAS ================= */
+    .fila {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+
+      @media (max-width: 850px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ================= INPUT ================= */
+    .input {
+      width: 94%;
+      height: 50px;
+      border-radius: 10px;
+      padding: 0 1rem;
+      border: 1.6px solid $gris-borde;
+      background: #fff;
+      font-size: 0.95rem;
+      transition: 0.2s;
+
+      &:focus {
+        border-color: $rojo-botones;
+        box-shadow: 0 0 0 2px rgba($rojo-botones, 0.15);
+        outline: none;
+      }
+    }
+
+    /* ================= GRUPO RADIO ================= */
+    .grupo-radio {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .title-label {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: $texto-principal;
+        margin-bottom: 0.3rem;
+      }
+
+      .radio-box {
+        background: #fff;
+        border: 1.6px solid $gris-borde;
+        border-radius: 14px;
+
+        padding: 1.1rem 1.3rem;
+        min-height: 90px;
+
+        display: flex;
+        align-items: flex-start;
+        gap: 1.1rem;
+
+        cursor: pointer;
+        transition: 0.18s;
+
+        &:hover {
+          border-color: darken($gris-borde, 10%);
+          background: #fafafa;
+        }
+
+        &.active {
+          border-color: $rojo-botones;
+          background: #fff8f8;
+          box-shadow: 0 0 0 2px rgba($rojo-botones, 0.12);
+        }
+
+        /* ================= RADIO CIRCULAR DOBLE ================= */
+        .radio {
+          margin-top: 4px;
+
+          .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid $gris-borde;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+
+            /* CÍRCULO INTERIOR */
+            &::after {
+              content: "";
+              width: 14px;
+              height: 14px;
+              border-radius: 50%;
+              background: transparent;
+              transition: 0.2s;
+            }
+
+            /* Cuando está seleccionado */
+            &.checked {
+              border-color: $rojo-botones;
+
+              &::after {
+                background: $rojo-botones;
+              }
+            }
+          }
+        }
+
+        /* ================= TEXTO DEL RADIO ================= */
+        .text {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+
+          .t1 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: $texto-principal;
+          }
+
+          .t2 {
+            font-size: 0.88rem;
+            line-height: 1.3rem;
+            color: $texto-secundario;
+          }
+        }
+      }
+    }
+
+    /* ================= NOTA ================= */
+    .nota-box {
+      background: #e8f6ff;
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+
+      .icono {
+        font-size: 1.25rem;
+        color: $azul-informativo;
+        margin-top: 2px;
+      }
+
+      .texto {
+        .n-title {
+          font-weight: 600;
+          font-size: 0.95rem;
+          color: $azul-informativo;
+        }
+
+        .n-body {
+          color: $texto-secundario;
+          margin-top: 2px;
+          font-size: 0.88rem;
+          line-height: 1.35rem;
+        }
+      }
+    }
+  }
+}

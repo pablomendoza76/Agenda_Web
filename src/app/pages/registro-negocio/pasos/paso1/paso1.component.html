@@ -1,0 +1,109 @@
+<div class="step1-container">
+
+  <!-- SELECCIÓN DE PLANES -->
+  <div class="contenedor-plan">
+    <div class="planes">
+
+      <!-- PLAN STARTER -->
+      <button
+        type="button"
+        class="plan-card starter"
+        [class.active]="selectedPlan === 'starter'"
+        (click)="seleccionarPlan('starter')"
+      >
+
+        <div class="plan-header">
+          <span class="plan-nombre starter">Plan Starter</span>
+
+          <span
+            class="plan-radio"
+            [class.checked]="selectedPlan === 'starter'"
+          ></span>
+        </div>
+
+        <h3 class="h2-semibold plan-precio">Gratis</h3>
+
+        <hr class="plan-divider" />
+
+        <p class="body-regular descripcion">
+          Ideal para quienes están empezando y necesitan una agenda simple pero funcional.
+        </p>
+
+      </button>
+      <!-- FIN PLAN STARTER -->
+
+
+      <!-- PLAN PRO -->
+      <button
+        type="button"
+        class="plan-card pro"
+        [class.active]="selectedPlan === 'pro'"
+        [class.recommended-default]="selectedPlan === null"
+        (click)="seleccionarPlan('pro')"
+      >
+
+        <div class="plan-header">
+          <span class="plan-nombre pro">Plan Pro</span>
+
+          <span class="etiqueta-recomendado">Recomendado</span>
+
+          <span
+            class="plan-radio"
+            [class.checked]="selectedPlan === 'pro'"
+          ></span>
+        </div>
+
+        <h3 class="h2-semibold plan-precio">
+          $ 29.00 <span class="mes">/mes</span>
+        </h3>
+
+        <hr class="plan-divider" />
+
+        <p class="body-regular descripcion">
+          Perfecto para negocios que crecen y requieren más control y personalización.
+        </p>
+
+      </button>
+      <!-- FIN PLAN PRO -->
+
+    </div>
+  </div>
+
+  <!-- DETALLES DEL PLAN STARTER -->
+  <div class="detalles" *ngIf="selectedPlan === 'starter'">
+    <h4 class="headline-title-medium">Plan Starter incluye:</h4>
+
+    <ul class="detalles-lista">
+      <li><i class="fa-solid fa-check"></i>Agenda básica</li>
+      <li><i class="fa-solid fa-check"></i>1 usuario con acceso completo</li>
+      <li><i class="fa-solid fa-check"></i>Visualización de citas en calendario</li>
+      <li><i class="fa-solid fa-check"></i>50 citas mensuales</li>
+      <li><i class="fa-solid fa-check"></i>Subdominio personalizado</li>
+      <li><i class="fa-solid fa-check"></i>Recordatorios por correo</li>
+    </ul>
+  </div>
+
+  <!-- DETALLES DEL PLAN PRO -->
+  <div class="detalles" *ngIf="selectedPlan === 'pro'">
+    <h4 class="headline-title-medium">Plan Pro incluye:</h4>
+
+    <ul class="detalles-lista">
+      <li><i class="fa-solid fa-check"></i>Usuarios múltiples con roles asignables</li>
+      <li><i class="fa-solid fa-check"></i>Gestión de personal y servicios</li>
+      <li><i class="fa-solid fa-check"></i>Subdominio personalizado para reservas</li>
+      <li><i class="fa-solid fa-check"></i>Recordatorios automáticos por correo y WhatsApp</li>
+      <li><i class="fa-solid fa-check"></i>Reportes detallados de agendamiento</li>
+      <li><i class="fa-solid fa-check"></i>Integración con sistemas externos</li>
+    </ul>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota">
+    <p><strong>¿No estás seguro?</strong></p>
+    <p>
+      Puedes empezar con el plan Starter gratuito y actualizarlo en cualquier momento
+      desde tu panel de administración.
+    </p>
+  </div>
+
+</div>

@@ -1,0 +1,61 @@
+<!-- Barra de navegación -->
+<app-barra-navegacion></app-barra-navegacion>
+
+<!-- HEADER GLOBAL (solo si NO se ha creado el negocio) -->
+<div class="header-wrapper" *ngIf="!negocioCreado">
+  <div class="header-global">
+    <h1 class="titulo-global">Crea el perfil de tu negocio</h1>
+    <p class="subtitulo-global">
+      Configura tu sistema de citas en solo 5 minutos
+    </p>
+  </div>
+</div>
+
+<!-- ======================= CONTENIDO DINÁMICO ======================= -->
+
+<!-- SI AÚN NO SE CREA EL NEGOCIO -->
+<ng-container *ngIf="!negocioCreado; else finalTemplate">
+
+  <!-- HEADER DEL PASO -->
+  <div class="paso-header">
+
+    <div class="paso-info">
+      <h2 class="titulo-paso">{{ tituloPasoActual }}</h2>
+      <p class="subtitulo-paso">{{ subtituloPasoActual }}</p>
+    </div>
+
+    <div class="progreso" [style.background]="getProgressBackground()">
+      <span>{{ pasoActual }}/5</span>
+    </div>
+
+  </div>
+
+  <!-- PASOS -->
+  <ng-container [ngSwitch]="pasoActual">
+    <app-paso1 *ngSwitchCase="1"></app-paso1>
+    <app-paso2 *ngSwitchCase="2"></app-paso2>
+    <app-paso3 *ngSwitchCase="3"></app-paso3>
+    <app-paso4 *ngSwitchCase="4"></app-paso4>
+    <app-paso5 *ngSwitchCase="5"></app-paso5>
+  </ng-container>
+
+  <!-- BOTONES -->
+  <div class="acciones">
+    <button class="btn anterior"
+            [disabled]="pasoActual === 1"
+            (click)="anterior()">
+      Anterior
+    </button>
+
+    <button class="btn siguiente"
+            (click)="siguiente()">
+      {{ pasoActual === 5 ? 'Crear negocio' : 'Siguiente' }}
+    </button>
+  </div>
+
+</ng-container>
+
+<!-- ======================= COMPONENTE FINAL ======================= -->
+<ng-template #finalTemplate>
+  <app-final-negocio-creado></app-final-negocio-creado>
+</ng-template>

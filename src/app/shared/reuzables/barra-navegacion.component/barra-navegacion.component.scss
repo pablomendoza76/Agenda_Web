@@ -1,34 +1,39 @@
 @use '../../catalogo/colores' as *;
 @use '../../catalogo/tipografia' as *;
 
+/* ===================================================== */
+/*                    🔥 NAVBAR MEJORADA                 */
+/* ===================================================== */
+
 .navbar {
   width: 100%;
   max-width: 100vw;
-  box-sizing: border-box;
   background-color: $fondo-claro;
   border-bottom: 1px solid $gris-borde;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 4.5rem;
 
-  /* Mantiene la barra pegada arriba sin tapar contenido */
+  /* Más alto y elegante */
+  padding: 1rem 5rem;
   position: fixed;
   top: 0;
-  z-index: 200; // un poco más alto por seguridad
+  z-index: 200;
 
   font-family: $font-work-sans;
   overflow-x: visible;
 
-  /* --- Logo --- */
+  /* ===================================================== */
+  /*                     LOGO MÁS GRANDE                   */
+  /* ===================================================== */
   &__logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-left: 10rem;
+    gap: 0.7rem;
+    margin-left: 9rem;
 
     img {
-      height: 32px;
+      height: 42px;   /* antes 32px */
       width: auto;
       display: block;
     }
@@ -36,26 +41,33 @@
     span {
       font-family: $font-poppins;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 20px;   /* antes 18px */
       color: $rojo-botones;
+    }
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(1.1);
+      transition: 0.25s ease;
     }
   }
 
-  /* --- Contenedor central --- */
+  /* ===================================================== */
+  /*             ENLACES CENTRALES – MÁS GRANDES           */
+  /* ===================================================== */
   &__center {
     display: flex;
-    align-items: center;
+   align-items: center;
     justify-content: flex-end;
     flex: 1;
-    margin-right: 10rem;
+    margin-right: 9rem;
   }
 
-  /* --- Links --- */
   &__links {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 2.4rem;
     margin: 0;
     padding: 0;
 
@@ -64,29 +76,33 @@
       text-decoration: none;
       font-weight: 500;
       font-family: $font-work-sans;
-      font-size: 13px;
-      transition: color 0.2s ease;
+      font-size: 15px; /* más grande */
+      transition: all 0.25s ease;
 
+      /* Hover rojo + sombrita */
       &:hover,
       &.active {
         color: $rojo-botones;
+        text-shadow: 0 0 6px rgba(0, 0, 0, 0.07); /* sombra suave */
       }
     }
   }
 
-  /* --- Botón de inicio de sesión --- */
+  /* ===================================================== */
+  /*            BOTÓN LOGIN MEJORADO                       */
+  /* ===================================================== */
   &__actions {
-    margin-left: 2rem;
+    margin-left: 2.3rem;
 
     .btn-login {
       font-family: $font-poppins;
       font-weight: 500;
-      font-size: 13px;
+      font-size: 14px;       /* más grande */
       color: $rojo-botones;
       border: 1px solid $gris-borde;
       background: transparent;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
+      padding: 0.55rem 1.3rem;
+      border-radius: 22px;
       text-decoration: none;
       transition: all 0.3s ease;
 
@@ -94,11 +110,14 @@
         background: $rojo-botones;
         color: $fondo-claro;
         border-color: $rojo-botones;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* sombra gris */
       }
     }
   }
 
-  /* --- Menú hamburguesa (móvil) --- */
+  /* ===================================================== */
+  /*                MENÚ HAMBURGUESA                       */
+  /* ===================================================== */
   &__toggle {
     display: none;
     flex-direction: column;
@@ -108,7 +127,7 @@
     cursor: pointer;
 
     span {
-      width: 22px;
+      width: 24px;
       height: 2px;
       background-color: $texto-principal;
       border-radius: 2px;
@@ -116,115 +135,102 @@
     }
   }
 
-  /* --- Responsive --- */
+  /* ===================================================== */
+  /*                  RESPONSIVE TABLET                     */
+  /* ===================================================== */
   @media (max-width: 992px) {
-    padding: 0.75rem 2.5rem;
+    padding: 1rem 2rem;
 
     &__center {
-      margin-right: 0.5rem;
+      margin-right: 0;
     }
   }
 
- @media (max-width: 768px) {
-
-  .navbar {
-    padding: 0.85rem 1.3rem !important;
+  /* ===================================================== */
+  /*                     RESPONSIVE MÓVIL                   */
+  /* ===================================================== */
+  @media (max-width: 768px) {
+    padding: 0.9rem 1.3rem !important;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-bottom: 1px solid $gris-borde;
-  }
 
-  /* LOGO CENTRADO Y MÁS PEQUEÑO */
-  .navbar__logo {
-    margin-left: 0 !important;
+    &__logo {
+      margin-left: 0 !important;
 
-    img {
-      height: 28px !important;
+      img {
+        height: 32px !important;
+      }
+
+      span {
+        font-size: 17px !important;
+      }
     }
 
-    span {
-      font-size: 16px !important;
-    }
-  }
-
-  /* TOGGLE (HAMBURGUESA) */
-  .navbar__toggle {
-    display: flex !important;
-    margin-left: auto;
-  }
-
-  /* CONTENEDOR CENTRAL */
-  .navbar__center {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 0 !important;
-    margin-top: 0.6rem;
-  }
-
-  /* LINKS OCULTOS POR DEFECTO */
-  .navbar__links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    padding: 0.8rem 0 1rem;
-    border-top: 1px solid $gris-borde;
-    gap: 0.85rem;
-
-    li a {
-      font-size: 14px !important;
-      padding: 0.35rem 0;
-    }
-  }
-
-  /* BOTÓN LOGIN */
-  .navbar__actions {
-    margin: 0.5rem 0;
-
-    .btn-login {
-      width: 100%;
-      display: block;
-      text-align: center;
-      border-radius: 22px;
-      font-size: 14px !important;
-      padding: 0.5rem 1rem;
-    }
-  }
-
-  /* MOSTRAR MENÚ CUANDO EL NAVBAR TIENE LA CLASE "active" */
-  .navbar.active {
-
-    .navbar__links {
+    &__toggle {
       display: flex !important;
+      margin-left: auto;
+    }
+
+    &__center {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0;
+      margin-top: 0.6rem;
+    }
+
+    &__links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      padding: 1rem 0;
+      border-top: 1px solid $gris-borde;
+      gap: 1rem;
+
+      li a {
+        font-size: 15px !important;
+      }
+    }
+
+    &__actions {
+      .btn-login {
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-size: 15px !important;
+        padding: 0.55rem 1rem;
+      }
+    }
+
+    /* Mostrar menú si la navbar tiene clase "active" */
+    &.active {
+      .navbar__links {
+        display: flex !important;
+      }
     }
   }
-}
 
-/* ========================================================= */
-/*         📱 EXTRA-SMALL (Teléfonos pequeños <480px)        */
-/* ========================================================= */
-@media (max-width: 480px) {
-
-  .navbar {
+  /* ===================================================== */
+  /*                EXTRA SMALL (TELÉFONOS)                */
+  /* ===================================================== */
+  @media (max-width: 480px) {
     padding: 0.7rem 1rem !important;
-  }
 
-  .navbar__logo img {
-    height: 24px !important;
-  }
+    .navbar__logo img {
+      height: 26px !important;
+    }
 
-  .navbar__logo span {
-    font-size: 15px !important;
-  }
+    .navbar__logo span {
+      font-size: 15px !important;
+    }
 
-  .navbar__links li a {
-    font-size: 13px !important;
-  }
+    .navbar__links li a {
+      font-size: 14px !important;
+    }
 
-  .navbar__actions .btn-login {
-    font-size: 13px !important;
-    border-radius: 18px;
-    padding: 0.45rem 0.9rem;
+    .navbar__actions .btn-login {
+      font-size: 14px !important;
+      border-radius: 20px;
+    }
   }
-}
 }

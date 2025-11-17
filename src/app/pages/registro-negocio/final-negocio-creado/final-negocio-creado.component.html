@@ -1,0 +1,90 @@
+<div class="fondo">
+
+  <div class="envoltorio">   <!-- NUEVO: Contenedor que centra todo -->
+
+    <div class="tarjeta-final">
+
+      <!-- ICONO DE CHECK -->
+      <div class="icono-success">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+
+      <!-- TITULOS -->
+      <h2 class="titulo-principal">¡Tu negocio se ha creado con éxito!</h2>
+      <p class="subtitulo">Ahora crea tus credenciales de acceso al sistema</p>
+
+      <!-- FORMULARIO -->
+      <div class="bloque-form">
+
+        <h3 class="titulo-mini">Crear credenciales de acceso</h3>
+        <p class="descripcion">
+          Estas credenciales te permitirán acceder al panel de administración.
+        </p>
+
+        <!-- Email -->
+        <label class="label-input">Email de administrador</label>
+        <div class="input-icon">
+          <i class="fa-solid fa-envelope"></i>
+          <input
+            type="email"
+            [(ngModel)]="emailAdmin"
+            class="input"
+            readonly
+          >
+        </div>
+
+        <!-- Contraseña -->
+        <label class="label-input">Contraseña</label>
+        <div class="input-icon">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            [type]="mostrarPass ? 'text' : 'password'"
+            [(ngModel)]="password"
+            placeholder="Ingresa la contraseña"
+            class="input"
+          >
+          <i 
+            class="fa-solid fa-eye icon-right"
+            (click)="mostrarPass = !mostrarPass"
+          ></i>
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <label class="label-input">Confirmar contraseña</label>
+        <div class="input-icon">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            [type]="mostrarPass2 ? 'text' : 'password'"
+            [(ngModel)]="passwordConfirm"
+            placeholder="Confirme la contraseña"
+            class="input"
+          >
+          <i 
+            class="fa-solid fa-eye icon-right"
+            (click)="mostrarPass2 = !mostrarPass2"
+          ></i>
+        </div>
+
+        <!-- BOTÓN -->
+        <button class="btn-crear" (click)="crearCuenta()">
+          Crear Cuenta y Acceder al sistema
+        </button>
+
+      </div>
+
+      <!-- BLOQUE INFORMATIVO FINAL -->
+      <div class="nota-final">
+        <i class="fa-solid fa-building icon"></i>
+        <div class="texto">
+          <p class="titulo">Tu negocio está listo</p>
+          <p class="desc">
+            Una vez que crees tu cuenta, podrás acceder inmediatamente a tu panel de control.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
