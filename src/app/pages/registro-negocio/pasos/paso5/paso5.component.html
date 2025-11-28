@@ -16,6 +16,29 @@
 
       </div>
     </div>
+    <!-- ======================= ALERTA SUBDOMINIO ======================= -->
+<div class="alerta-subdominio" *ngIf="estadoSubdominio !== 'vacio'">
+
+  <!-- VALIDANDO -->
+  <div *ngIf="estadoSubdominio === 'validando'" class="alert alert-info">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    Validando disponibilidad...
+  </div>
+
+  <!-- DISPONIBLE -->
+  <div *ngIf="estadoSubdominio === 'disponible'" class="alert alert-success">
+    <i class="fa-solid fa-circle-check"></i>
+    Subdominio disponible ✔
+  </div>
+
+  <!-- OCUPADO -->
+  <div *ngIf="estadoSubdominio === 'ocupado'" class="alert alert-danger">
+    <i class="fa-solid fa-circle-xmark"></i>
+    Subdominio ocupado, por favor ingrese uno nuevo ✖
+  </div>
+
+</div>
+
 
 
     <!-- ======================= VISTA PREVIA URL ======================= -->
@@ -29,6 +52,8 @@
         {{ urlPreview }}
       </div>
     </div>
+
+    
 
     <!-- ======================= CONSEJOS ======================= -->
     <div class="nota-box">

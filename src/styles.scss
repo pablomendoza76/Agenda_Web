@@ -1,4 +1,153 @@
-/* You can add global styles to this file, and also import other style files */
+/* Puedes añadir estilos globales a este archivo, y también importar otros archivos de estilo */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ============================
+ CONTENEDOR GLOBAL (TOAST DERECHA)
+ ============================ */
+#toast-container {
+ position: fixed !important;
+ top: 20px !important;
+ right: 20px !important;
+ z-index: 999999 !important;
+ width: auto !important;
+}
+
+/* ============================
+ BASE DE TODOS LOS TOASTS
+ ============================ */
+.toast {
+ display: flex !important;
+ align-items: flex-start !important;
+ gap: 14px !important;
+
+ padding: 14px 18px !important;
+ border-radius: 14px !important;
+
+ min-width: 300px !important;
+ max-width: 370px !important;
+
+ box-shadow: 0 4px 14px rgba(0,0,0,0.10) !important;
+ font-family: "Inter", sans-serif !important;
+ border: none !important;
+
+ position: relative !important;
+  /* Espacio a la derecha para el botón X */
+  padding-right: 40px !important; 
+}
+
+/* ============================
+ ***** ICONO CÍRCULO *****
+ ============================ */
+.toast-icon {
+ width: 26px !important;
+ height: 26px !important;
+ border-radius: 50%;
+ display: flex !important;
+ align-items: center !important;
+ justify-content: center !important;
+ font-size: 15px !important;
+ font-weight: bold !important;
+  margin-top: 0; /* Asegurar alineación con el título */
+}
+
+/* ============================
+ CONTENIDO (Estructura de DOS LÍNEAS)
+ ============================ */
+
+/* Revertimos el contenedor de texto al flujo normal de bloque */
+.toast-container div:not(.toast-icon) {
+    display: block !important;
+    flex-grow: 1; /* Para que el texto use el espacio */
+    padding-right: 0 !important;
+}
+
+/* TITULO: Primera Línea */
+.toast-title {
+ font-size: 16px !important;
+ font-weight: 600 !important;
+ margin-bottom: 4px !important; /* Espacio entre el título y la descripción */
+ margin-top: 0 !important;
+ padding: 0 !important;
+ display: block !important; /* Asegurar que ocupe una línea */
+}
+
+/* MENSAJE: Segunda Línea */
+.toast-message {
+ font-size: 14px !important;
+ line-height: 1.35;
+ opacity: 0.85;
+  margin: 0 !important;
+ padding: 0 !important;
+ display: block !important; /* Asegurar que ocupe otra línea */
+}
+
+
+/* ============================
+ ***** BOTÓN X (SIN CUADRADO) *****
+ ============================ */
+.toast-close-button {
+ position: absolute !important;
+ top: 14px !important; /* Alineado verticalmente con el título */
+ right: 12px !important;
+
+ font-size: 22px !important;
+ opacity: 0.45 !important;
+ padding: 0 !important;
+ margin: 0 !important;
+
+ background: transparent !important; /* Limpiar fondo */
+ border: none !important; /* **QUITAR CUALQUIER BORDE** */
+ outline: none !important; /* Quitar contorno al hacer foco/clic */
+  box-shadow: none !important; /* Quitar cualquier sombra o box */
+  text-shadow: none !important; /* Quitar sombras de texto si las hubiera */
+  
+  /* Asegurar que el contenido sea solo la X y no haya un contenedor visual */
+  height: auto !important; 
+  width: auto !important;
+}
+
+.toast-close-button:hover {
+ opacity: 1 !important;
+}
+
+
+/* ============================
+ ***** VARIANTES (COLORES) *****
+ ============================ */
+
+/* SUCCESS */
+.toast-success-custom {
+ background: #ecfdf5 !important;
+ color: #064e3b !important;
+}
+.toast-success-custom .toast-icon {
+ background: #05966925;
+ color: #059669 !important;
+}
+/* ... (El resto de las variantes de color permanecen igual) ... */
+.toast-error-custom {
+ background: #fef2f2 !important;
+ color: #7f1d1d !important;
+}
+.toast-error-custom .toast-icon {
+ background: #dc262625;
+ color: #dc2626 !important;
+}
+.toast-warning-custom {
+ background: #fffbeb !important;
+ color: #78350f !important;
+}
+.toast-warning-custom .toast-icon {
+ background: #d9770625;
+ color: #d97706 !important;
+}
+.toast-info-custom {
+ background: #eff6ff !important;
+ color: #1e3a8a !important;
+}
+.toast-info-custom .toast-icon {
+ background: #2563eb25;
+ color: #2563eb !important;
+}

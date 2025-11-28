@@ -14,64 +14,46 @@
     flex-direction: column;
     gap: 1.8rem;
 
-    /* ----------------- LABELS ----------------- */
     label {
       font-size: 0.9rem;
       font-weight: 600;
       color: $texto-principal;
-
-      .req {
-        color: $rojo-botones;
-      }
     }
 
-    /* ======================================================
-                     SUBDOMINIO - EXACTO A LA IMAGEN
-    ======================================================= */
-    /* CONTENEDOR GRIS EXTERNO */
     .wrapper-exterior {
       background: $gris-fondo;
-      /* gris suave exacto */
-      padding: 2rem 1.5rem;
-      /* deja espacio interno como la imagen */
+      padding: 1.8rem 1.4rem;
       border-radius: 12px;
       border: 1px solid #e6e6e6;
-      transition: 0.25s;
-
-      &:focus-within {
-        border-color: $rojo-botones;
-        box-shadow: 0 0 0 2px rgba($rojo-botones, .15);
-      }
+      transition: 0.2s;
     }
 
-    /* CONTENEDOR BLANCO INTERNO (input + dominio) */
+    .wrapper-exterior:focus-within {
+      border-color: $rojo-botones;
+      box-shadow: 0 0 0 2px rgba($rojo-botones, .15);
+    }
+
     .wrapper-interno {
       background: white;
       border-radius: 10px;
       border: 1px solid #dfdfdf;
-      height: 46px;
+      height: 45px;
       display: flex;
       align-items: center;
       overflow: hidden;
     }
 
-    /* INPUT */
     .input-sub {
       flex: 1;
       height: 100%;
-      padding: 0 14px;
+      padding: 0 12px;
       border: none;
       outline: none;
       background: white;
-      font-size: .95rem;
+      font-size: .93rem;
       color: $texto-principal;
-
-      &::placeholder {
-        color: #b8b8b8;
-      }
     }
 
-    /* DOMINIO FIJO */
     .dominio-fijo {
       background: white;
       height: 100%;
@@ -79,25 +61,8 @@
       border-left: 1px solid #e0e0e0;
       display: flex;
       align-items: center;
-      font-size: .95rem;
+      font-size: .93rem;
       color: $texto-secundario;
-    }
-
-
-    /* ======================================================
-                         VISTA PREVIA URL
-    ======================================================= */
-    .label-url {
-      font-weight: 600;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      i {
-        color: $rojo-botones;
-        font-size: 1rem;
-      }
     }
 
     .preview-url {
@@ -111,40 +76,112 @@
       font-weight: 500;
     }
 
-    /* ======================================================
-                              NOTA
-    ======================================================= */
     .nota-box {
       background: #e8f6ff;
       border-radius: 10px;
       padding: 1rem 1.3rem;
       display: flex;
       gap: 1rem;
-
-      .icono {
-        font-size: 1.3rem;
-        color: $azul-informativo;
-      }
-
-      .texto {
-        .n-title {
-          font-weight: 600;
-          font-size: 0.95rem;
-          color: $azul-informativo;
-          margin-bottom: 0.4rem;
-        }
-
-        ul {
-          padding-left: 1.2rem;
-          margin: 0;
-
-          li {
-            font-size: 0.87rem;
-            color: $texto-secundario;
-            margin-bottom: 2px;
-          }
-        }
-      }
     }
+
+    .icono {
+      color: $azul-informativo;
+      font-size: 1.3rem;
+    }
+
+    .texto .n-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: $azul-informativo;
+      margin-bottom: 0.4rem;
+    }
+
+    .texto ul li {
+      font-size: 0.87rem;
+      color: $texto-secundario;
+    }
+
+    /* ALERTAS SUBDOMINIO */
+    .alerta-subdominio {
+      width: 100%;
+      margin-top: -0.6rem;
+    }
+
+    .alert {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .alert-info {
+      background: #eaf4ff;
+      color: #2f72c9;
+      border: 1px solid #cfe2ff;
+    }
+
+    .alert-success {
+      background: #e6f8ec;
+      color: #2c8a49;
+      border: 1px solid #bfe8cb;
+    }
+
+    .alert-danger {
+      background: #fdeaea;
+      color: #c74242;
+      border: 1px solid #f4b1b1;
+    }
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+  .paso5-container {
+    max-width: 95%;
+    padding: 1.6rem 1.2rem;
+  }
+
+  .wrapper-interno {
+    height: 42px !important;
+  }
+
+  .input-sub {
+    font-size: 0.88rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .paso5-container {
+    max-width: 100%;
+    padding: 1.2rem 1rem;
+  }
+
+  .wrapper-interno {
+    height: 38px !important;
+  }
+
+  .input-sub {
+    font-size: 0.85rem !important;
+  }
+
+  .dominio-fijo {
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .wrapper-interno {
+    height: 34px !important;
+  }
+
+  .input-sub {
+    font-size: 0.8rem !important;
+  }
+
+  .dominio-fijo {
+    font-size: 0.8rem !important;
   }
 }

@@ -1,0 +1,14 @@
+<footer class="footer">
+  <div class="footer__texto">
+    © 2024-25 Punto Pymes. Todos los derechos reservados.
+  </div>
+
+  <div class="footer__social">
+    <a *ngFor="let red of redes"
+       [href]="red.url"
+       target="_blank"
+       rel="noopener noreferrer">
+      <i [class]="red.icono"></i>
+    </a>
+  </div>
+</footer>

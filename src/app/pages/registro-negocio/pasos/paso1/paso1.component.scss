@@ -185,3 +185,157 @@
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/* ==========================================================
+   RESPONSIVE DEL PASO 1 — PLANES
+========================================================== */
+
+/* =======================
+   ≤ 1200px – Ajuste general
+======================= */
+@media (max-width: 1200px) {
+  .step1-container {
+    max-width: 75%;
+  }
+}
+
+/* =======================
+   ≤ 1024px – Tablets grandes
+======================= */
+@media (max-width: 1024px) {
+  .step1-container {
+    max-width: 90%;
+    padding: 1rem 0.5rem;
+    gap: 2rem;
+  }
+
+  .step1-container .planes {
+    gap: 1rem;
+  }
+
+  .step1-container .plan-card {
+    padding: 1.8rem;
+    min-width: 260px;
+  }
+
+  /* Etiqueta recomendado más cerca */
+  .step1-container .plan-card .etiqueta-recomendado {
+    top: -3.4rem;
+  }
+}
+
+/* =======================
+   ≤ 768px – Tablets pequeñas / iPad
+======================= */
+@media (max-width: 768px) {
+  .step1-container {
+    max-width: 100%;
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+    gap: 1.8rem;
+  }
+
+  /* Layout de tarjetas más vertical */
+  .step1-container .planes {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .step1-container .plan-card {
+    min-width: 100%;
+    padding: 1.6rem;
+    border-radius: 14px;
+  }
+
+  /* Reduce tamaño de textos */
+  .step1-container .plan-card .plan-precio {
+    font-size: 1.8rem !important;
+  }
+
+  /* Reposicionar etiqueta recomendado */
+  .step1-container .plan-card .etiqueta-recomendado {
+    top: -2.6rem;
+    font-size: 0.85rem;
+    padding: 3px 10px;
+  }
+
+  .step1-container .detalles {
+    padding: 1rem 1.2rem;
+  }
+}
+
+/* =======================
+   ≤ 480px – Celulares
+======================= */
+@media (max-width: 480px) {
+
+  .step1-container {
+    padding: 0.5rem;
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+
+  /* Cards más compactas */
+  .step1-container .plan-card {
+    padding: 1.3rem;
+    min-height: auto;
+    border-radius: 12px;
+  }
+
+  .step1-container .plan-card .plan-header {
+    margin-bottom: 0.6rem;
+  }
+
+  .step1-container .plan-card .plan-radio {
+    width: 18px;
+    height: 18px;
+  }
+
+  .step1-container .plan-card .plan-precio {
+    font-size: 1.55rem !important;
+  }
+
+  .step1-container .planes {
+    gap: 1.1rem;
+  }
+
+  /* Etiqueta recomendado más pegada y pequeña */
+  .step1-container .plan-card .etiqueta-recomendado {
+    top: -2.1rem;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+  }
+
+  /* Divider más corto */
+  .step1-container .plan-divider {
+    margin: 0.7rem 0;
+  }
+
+  /* Detalles */
+  .step1-container .detalles {
+    padding: 1rem;
+  }
+
+  .step1-container .detalles-lista {
+    grid-template-columns: 1fr !important;
+    gap: 0.6rem;
+  }
+}
+
+/* =======================
+   ≤ 370px – Teléfonos pequeños (Android gama baja)
+======================= */
+@media (max-width: 370px) {
+
+  .step1-container .plan-card {
+    padding: 1rem;
+  }
+
+  .step1-container .plan-card .plan-precio {
+    font-size: 1.45rem !important;
+  }
+
+  .step1-container .plan-card .plan-header .etiqueta-recomendado {
+    top: -1.9rem;
+    font-size: 0.75rem;
+  }
+}

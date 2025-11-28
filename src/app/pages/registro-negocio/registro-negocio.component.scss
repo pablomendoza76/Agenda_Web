@@ -1,9 +1,7 @@
 @use '../../shared/catalogo/colores' as *;
 @use '../../shared/catalogo/tipografia' as *;
 
-/* ==========================================================
-   CONTENEDOR DEL HEADER GLOBAL
-   ========================================================== */
+/* CONTENEDOR DEL HEADER GLOBAL */
 .header-wrapper {
   position: relative;
   max-width: 1080px;
@@ -11,9 +9,7 @@
   padding: 0 1rem;
 }
 
-/* ==========================================================
-   HEADER GLOBAL
-   ========================================================== */
+/* HEADER GLOBAL */
 .header-global {
   background: #f7f7f7;
   padding: 2rem 2.8rem;
@@ -39,9 +35,7 @@
   }
 }
 
-/* ==========================================================
-   HEADER DEL PASO
-   ========================================================== */
+/* HEADER DEL PASO */
 .paso-header {
   max-width: 1080px;
   margin: 2rem auto 1rem auto;
@@ -92,16 +86,15 @@
   }
 }
 
-/* ==========================================================
-   BOTONES DE ACCIÓN
-   ========================================================== */
+/* BOTONES DE ACCIÓN */
 .acciones {
   max-width: 50%;
-  margin: 1.5rem auto 1.5rem auto;
+  margin: 1.5rem auto;
   padding: 1rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem; // separador para móviles
 
   .btn {
     padding: 0.85rem 2.2rem;
@@ -112,6 +105,11 @@
     cursor: pointer;
     transition: all 0.25s ease;
     border: none;
+    position: relative; // necesario para el loader interno
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 
     &.anterior {
       background: #f3f3f3;
@@ -124,7 +122,7 @@
       color: $texto-claro;
     }
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled):not(.loading) {
       transform: scale(1.03);
     }
 
@@ -132,141 +130,270 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+
+    /* ======== ESTADO: LOADING ========= */
+    &.loading {
+      color: transparent !important; /* oculta texto sin mover contenido */
+      pointer-events: none;
+
+      &:after {
+        content: "";
+        display: flex;
+        width: 35px;
+        height: 12px;
+        justify-content: space-between;
+        position: absolute;
+
+        animation: none;
+
+        /* PUNTOS */
+        --color: #fff;
+        background:
+          radial-gradient(circle 4px at center, var(--color) 100%, transparent 0),
+          radial-gradient(circle 4px at center, var(--color) 100%, transparent 0),
+          radial-gradient(circle 4px at center, var(--color) 100%, transparent 0);
+        background-size: 8px 8px;
+        background-repeat: no-repeat;
+        background-position:
+          0% 50%,
+          50% 50%,
+          100% 50%;
+
+        animation: bounceDots 1s infinite linear;
+      }
+    }
   }
 }
 
-/* ==========================================================
-   📱 RESPONSIVE — TABLET (≤ 992px)
-   ========================================================== */
-@media (max-width: 992px) {
+/* ANIMACIÓN DE PUNTOS SALTANDO */
+@keyframes bounceDots {
+  0% {
+    background-position:
+      0% 50%,
+      50% 50%,
+      100% 50%;
+  }
+  20% {
+    background-position:
+      0% 30%,
+      50% 50%,
+      100% 50%;
+  }
+  40% {
+    background-position:
+      0% 50%,
+      50% 30%,
+      100% 50%;
+  }
+  60% {
+    background-position:
+      0% 50%,
+      50% 50%,
+      100% 30%;
+  }
+  80% {
+    background-position:
+      0% 50%,
+      50% 50%,
+      100% 50%;
+  }
+  100% {
+    background-position:
+      0% 50%,
+      50% 50%,
+      100% 50%;
+  }
+}
+
+/* ========== RESPONSIVE MÓVIL ========== */
+@media (max-width: 768px) {
+  .acciones {
+    max-width: 100%;
+    padding: 0.5rem 0.8rem;
+    gap: 0.8rem;
+
+    .btn {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .acciones {
+    flex-direction: column;
+    justify-content: center;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+
+/* ≤ 1024px – Tablets grandes*/
+@media (max-width: 1024px) {
 
   .header-wrapper {
-    max-width: 90%;
-    margin-top: 5rem;
+    margin: 4rem auto 1.5rem auto;
+    padding: 0 1rem;
   }
 
   .header-global {
     padding: 1.6rem 2rem;
+    border-radius: 16px;
 
     .titulo-global {
       font-size: 1.9rem;
     }
 
     .subtitulo-global {
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
   }
 
   .paso-header {
-    flex-direction: row;
-    gap: 1rem;
+    padding: 0 1rem;
+    margin: 2rem auto 1rem auto;
 
     .titulo-paso {
-      font-size: 1.45rem !important;
+      font-size: 1.5rem !important;
     }
-  }
 
-  .acciones {
-    max-width: 70%;
+    .subtitulo-paso {
+      font-size: 0.95rem !important;
+    }
+
+    .progreso {
+      margin-left: 1rem;
+      transform: scale(0.95);
+    }
   }
 }
 
-/* ==========================================================
-   📱 RESPONSIVE — MÓVIL (≤ 768px)
-   ========================================================== */
+/* ≤ 768px – Tablets pequeñas / iPad Mini*/
 @media (max-width: 768px) {
 
   .header-wrapper {
-    margin-top: 4rem;
-    padding: 0 0.6rem;
+    margin: 5.5rem auto 1.5rem auto;
+    padding: 0 1rem;
   }
 
   .header-global {
-    padding: 1.5rem;
+    padding: 1.4rem 1.4rem;
+    border-radius: 14px;
 
     .titulo-global {
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       line-height: 1.2;
     }
 
     .subtitulo-global {
       font-size: 0.9rem;
+      line-height: 1.3;
     }
   }
 
   .paso-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    flex-direction: row;
+    align-items: center;
+    margin: 1.8rem auto 1.2rem auto;
 
-    .titulo-paso {
-      font-size: 1.35rem;
-    }
+    /* Más cerca, más compacto */
+    .paso-info {
+      flex: 1;
 
-    .subtitulo-paso {
-      font-size: 0.9rem;
+      .titulo-paso {
+        font-size: 1.35rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .subtitulo-paso {
+        font-size: 0.9rem;
+      }
     }
 
     .progreso {
-      width: 48px;
-      height: 48px;
+      transform: scale(0.9);
+      min-width: 48px;
+    }
+  }
+}
 
-      span {
-        width: 36px;
-        height: 36px;
+/* ≤ 480px – Celulares*/
+@media (max-width: 480px) {
+
+  /* Reduce margenes en móviles */
+  .header-wrapper {
+    margin: 5rem auto 1.2rem auto;
+    padding: 0 0.75rem;
+  }
+
+  .header-global {
+    padding: 1.2rem 1.1rem;
+    border-radius: 12px;
+
+    .titulo-global {
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .subtitulo-global {
+      font-size: 0.85rem;
+      line-height: 1.3;
+    }
+  }
+
+  .paso-header {
+    margin: 1.5rem auto 1rem auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+
+    .paso-info {
+      flex: 1;
+
+      .titulo-paso {
+        font-size: 1.2rem;
+      }
+
+      .subtitulo-paso {
         font-size: 0.8rem;
       }
     }
-  }
-
-  .acciones {
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 100%;
-
-    .btn {
-      width: 100%;
-      text-align: center;
-    }
-  }
-}
-
-  /* ==========================================================
-   📱 ARREGLO ESPECÍFICO — PROGRESO Y TITULOS EN MÓVIL
-   ========================================================== */
-@media (max-width: 480px) {
-
-  /* Alinea todo correctamente */
-  .paso-header {
-    width: 100%;
-    padding: 0 1rem;
-    margin-top: 0.5rem;
-
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.6rem;
-
-    .paso-info {
-      width: 100%;
-      text-align: left;
-
-      .titulo-paso {
-        font-size: 1.25rem !important;
-      }
-    }
 
     .progreso {
-      margin-left: 0;    /* evita que se vaya a la izquierda */
-      align-self: flex-start;
-      transform: translateY(-4px); /* ajuste fino */
+      transform: scale(0.85);
+      margin-top: 0.3rem;
     }
   }
 
-  /* Asegura que el contenido no quede muy angosto */
-  .bloque-form,
-  .paso-header .paso-info {
-    width: 100% !important;
+  /* Ajuste importante: evita que el título "Selecciona tu plan" se vaya muy arriba */
+  .titulo-paso {
+    margin-top: 0.5rem !important;
   }
 }
+
+/* ≤ 380px – Pantallas pequeñas*/
+@media (max-width: 380px) {
+
+  .header-global {
+    padding: 1rem 0.9rem;
+    border-radius: 10px;
+
+    .titulo-global {
+      font-size: 1.3rem;
+    }
+  }
+
+  .paso-header .paso-info .titulo-paso {
+    font-size: 1.05rem;
+  }
+
+  .progreso {
+    transform: scale(0.75) !important;
+  }
+}
+
 

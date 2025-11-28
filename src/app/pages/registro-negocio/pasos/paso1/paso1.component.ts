@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { RegistroNegocioService } from '../../registro-negocio.service';
+import { AlertService } from '../../../../services/alert.service';
 
 @Component({
   selector: 'app-paso1',
@@ -17,9 +18,12 @@ export class Paso1Component implements OnInit {
   /** Emitimos al padre cuando se selecciona un plan */
   @Output() planSeleccionado = new EventEmitter<'starter' | 'pro'>();
 
-  constructor(private registroService: RegistroNegocioService) {}
+  constructor(
+    private registroService: RegistroNegocioService,
+    private alert: AlertService       // <-- Inyectamos alert service
+  ) {}
 
-  /** 🔥 Recuperamos el plan guardado al entrar al paso */
+  /** Recuperamos el plan guardado al entrar al paso */
   ngOnInit(): void {
     const planGuardado = this.registroService.getDato('plan');
     if (planGuardado) {
@@ -36,6 +40,17 @@ export class Paso1Component implements OnInit {
 
     // Emitimos al padre
     this.planSeleccionado.emit(plan);
+
+    // MANDAMOS ALERT
+    const nombres = {
+      starter: 'Starter',
+      pro: 'Pro'
+    };
+
+    this.alert.success(
+      `Has seleccionado el plan ${nombres[plan]}`,
+      'Plan actualizado'
+    );
   }
 
   /** Getters de estado */

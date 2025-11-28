@@ -1,7 +1,10 @@
 import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { RegistroNegocioService } from '../../registro-negocio.service';
+import { NegocioMapper } from '../../../../adapters/negocio.mapper';
+import { AlertService } from '../../../../services/alert.service';
 
 @Component({
   selector: 'app-paso2',
@@ -12,11 +15,9 @@ import { RegistroNegocioService } from '../../registro-negocio.service';
 })
 export class Paso2Component {
 
-  /* =====================================
-        FORMULARIO
-  ====================================== */
+  // Formulario
   form = {
-    tipoNegocio: '',
+    tipoNegocioId: null as number | null,
     ruc: '',
     razonSocial: '',
     nombreComercial: '',
@@ -24,84 +25,81 @@ export class Paso2Component {
     logoURL: null as string | null
   };
 
+  // Preview del logo
   logoPreview: string | null = null;
+  rucSoloNumeros = true;
+  rucLongitudCorrecta = true;
 
-  /* =====================================
-        OUTPUT PARA EL PADRE
-  ====================================== */
+
   @Output() infoNegocioChange = new EventEmitter<any>();
 
-  /* =====================================
-        DROPDOWN
-  ====================================== */
+  // Dropdown de tipo de negocio
   dropdownOpen = false;
+  tiposNegocio: { id: number; nombre: string }[] = [];
 
-  opciones = [
-    { value: 'salud', label: 'Centro de salud' },
-    { value: 'belleza', label: 'Centro de belleza' },
-    { value: 'mascotas', label: 'Veterinaria' },
-    { value: 'educacion', label: 'Academia / Tutoría' },
-    { value: 'otro', label: 'Otro' }
-  ];
+  constructor(
+    private registroService: RegistroNegocioService,
+    private negocioMapper: NegocioMapper,
+    private alert: AlertService
+  ) { }
 
-  constructor(private registroService: RegistroNegocioService) {}
-
-
-  /* =====================================
-        CARGAR DATOS GUARDADOS
-  ====================================== */
   ngOnInit(): void {
-    const guardado = this.registroService.getDato('infoNegocio');
+    // Cargar tipos de negocio
+    this.negocioMapper.obtenerTiposNegocio().subscribe({
+      next: (resp) => this.tiposNegocio = resp
+    });
 
+    // Recuperar datos guardados
+    const guardado = this.registroService.getDato('infoNegocio');
     if (guardado) {
       this.form = { ...this.form, ...guardado };
       this.logoPreview = guardado.logoURL || null;
     }
   }
 
-
-  /* =====================================
-        DROPDOWN: ABRIR / CERRAR
-  ====================================== */
+  // Abrir/cerrar dropdown
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  selectTipo(value: string) {
-    this.form.tipoNegocio = value;
+  // Seleccionar tipo
+  selectTipo(id: number) {
+    this.form.tipoNegocioId = id;
     this.dropdownOpen = false;
     this.emitirCambio();
   }
 
-  getLabel(value: string): string {
-    return this.opciones.find(o => o.value === value)?.label || '';
+  // Texto visible del select
+  getLabel(id: number | null): string {
+    return this.tiposNegocio.find(t => t.id === id)?.nombre || 'Selecciona una categoría de negocio';
   }
 
+  // Cerrar dropdown al hacer click afuera
   @HostListener('document:click', ['$event'])
   closeDropdownOutside(event: Event) {
     const target = event.target as HTMLElement;
     if (!target.closest('.dropdown')) this.dropdownOpen = false;
   }
 
-
-  /* =====================================
-        MANEJO DE ARCHIVOS
-  ====================================== */
+  // Selección de archivo
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.procesarLogo(file);
   }
 
+  // Drag over
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  // Drop logo
   onDrop(event: DragEvent) {
     event.preventDefault();
     const file = event.dataTransfer?.files[0];
     if (file) this.procesarLogo(file);
   }
 
+  // Procesar logo
   procesarLogo(file: File) {
     if (!file) return;
 
@@ -117,12 +115,51 @@ export class Paso2Component {
     reader.readAsDataURL(file);
   }
 
+  // Validar campos
+  camposCompletos(): boolean {
+    return (
+      !!this.form.tipoNegocioId &&
+      !!this.form.ruc &&
+      this.rucSoloNumeros &&        //  evita letras
+      this.rucLongitudCorrecta &&   //  evita menos o más de 13 dígitos
+      !!this.form.razonSocial &&
+      !!this.form.nombreComercial
+    );
+  }
 
-  /* =====================================
-        GUARDAR Y EMITIR AL PADRE
-  ====================================== */
+
+
+  // Mostrar alertas
+  validarAntesDeContinuar(): boolean {
+    if (!this.camposCompletos()) {
+      this.alert.warning(
+        'Completa todos los datos obligatorios para continuar.',
+        'Dato incompleto'
+      );
+      return false;
+    }
+    return true;
+  }
+
+  // Guardar cambios en el servicio
   emitirCambio() {
     this.registroService.setDato('infoNegocio', this.form);
     this.infoNegocioChange.emit(this.form);
   }
+
+  // Guardado automático para inputs
+  onChange() {
+    this.emitirCambio();
+  }
+
+  validarRuc() {
+    const ruc = this.form.ruc || '';
+
+    // Solo números
+    this.rucSoloNumeros = /^[0-9]*$/.test(ruc);
+
+    // Longitud exacta
+    this.rucLongitudCorrecta = ruc.length === 13;
+  }
+
 }

@@ -1,0 +1,31 @@
+<div class="alert-card">
+
+  <!-- Botón X -->
+  <button class="close-btn" (click)="close()">✕</button>
+
+  <!-- Círculo con icono -->
+  <div class="icon-wrapper" [ngClass]="type">
+    <span class="icon">
+      <ng-container [ngSwitch]="type">
+        <span *ngSwitchCase="'success'">✓</span>
+        <span *ngSwitchCase="'error'">✕</span>
+        <span *ngSwitchCase="'warning'">!</span>
+      </ng-container>
+    </span>
+  </div>
+
+  <!-- Título -->
+  <h2 class="title">{{ title }}</h2>
+
+  <!-- Mensaje -->
+  <p class="description">{{ message }}</p>
+
+  <!-- Botón opcional -->
+  <button 
+    *ngIf="buttonText" 
+    class="action-btn"
+    (click)="buttonAction?.()">
+      {{ buttonText }}
+  </button>
+
+</div>

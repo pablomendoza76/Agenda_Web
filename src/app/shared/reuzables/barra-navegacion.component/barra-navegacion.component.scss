@@ -1,9 +1,7 @@
 @use '../../catalogo/colores' as *;
 @use '../../catalogo/tipografia' as *;
 
-/* ===================================================== */
-/*                    🔥 NAVBAR MEJORADA                 */
-/* ===================================================== */
+/*  NAVBAR MEJORADA */
 
 .navbar {
   width: 100%;
@@ -23,9 +21,7 @@
   font-family: $font-work-sans;
   overflow-x: visible;
 
-  /* ===================================================== */
-  /*                     LOGO MÁS GRANDE                   */
-  /* ===================================================== */
+  /*     LOGO MÁS GRANDE   */
   &__logo {
     display: flex;
     align-items: center;
@@ -52,9 +48,7 @@
     }
   }
 
-  /* ===================================================== */
   /*             ENLACES CENTRALES – MÁS GRANDES           */
-  /* ===================================================== */
   &__center {
     display: flex;
    align-items: center;
@@ -88,9 +82,7 @@
     }
   }
 
-  /* ===================================================== */
-  /*            BOTÓN LOGIN MEJORADO                       */
-  /* ===================================================== */
+  /*            BOTÓN LOGIN MEJORADO       */
   &__actions {
     margin-left: 2.3rem;
 
@@ -115,9 +107,7 @@
     }
   }
 
-  /* ===================================================== */
-  /*                MENÚ HAMBURGUESA                       */
-  /* ===================================================== */
+  /*MENÚ HAMBURGUESA       */
   &__toggle {
     display: none;
     flex-direction: column;
@@ -135,9 +125,7 @@
     }
   }
 
-  /* ===================================================== */
-  /*                  RESPONSIVE TABLET                     */
-  /* ===================================================== */
+  /*  RESPONSIVE TABLET     */
   @media (max-width: 992px) {
     padding: 1rem 2rem;
 
@@ -146,9 +134,7 @@
     }
   }
 
-  /* ===================================================== */
-  /*                     RESPONSIVE MÓVIL                   */
-  /* ===================================================== */
+  /*     RESPONSIVE MÓVIL   */
   @media (max-width: 768px) {
     padding: 0.9rem 1.3rem !important;
     flex-wrap: wrap;
@@ -210,9 +196,7 @@
     }
   }
 
-  /* ===================================================== */
-  /*                EXTRA SMALL (TELÉFONOS)                */
-  /* ===================================================== */
+  /*EXTRA SMALL (TELÉFONOS)*/
   @media (max-width: 480px) {
     padding: 0.7rem 1rem !important;
 

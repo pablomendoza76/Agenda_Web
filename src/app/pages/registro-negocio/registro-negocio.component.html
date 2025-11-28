@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<!-- ======================= CONTENIDO DINÁMICO ======================= -->
+<!-- CONTENIDO DINÁMICO -->
 
 <!-- SI AÚN NO SE CREA EL NEGOCIO -->
 <ng-container *ngIf="!negocioCreado; else finalTemplate">
@@ -41,21 +41,21 @@
 
   <!-- BOTONES -->
   <div class="acciones">
-    <button class="btn anterior"
-            [disabled]="pasoActual === 1"
-            (click)="anterior()">
+    <button class="btn anterior" [disabled]="pasoActual === 1" (click)="anterior()">
       Anterior
     </button>
 
-    <button class="btn siguiente"
-            (click)="siguiente()">
-      {{ pasoActual === 5 ? 'Crear negocio' : 'Siguiente' }}
-    </button>
+    <button class="btn siguiente" (click)="siguiente()" [class.loading]="cargando" [disabled]="cargando">
+  {{ pasoActual === 5 ? 'Crear negocio' : 'Siguiente' }}
+</button>
+
   </div>
 
 </ng-container>
 
-<!-- ======================= COMPONENTE FINAL ======================= -->
+<!-- COMPONENTE FINAL -->
 <ng-template #finalTemplate>
   <app-final-negocio-creado></app-final-negocio-creado>
 </ng-template>
+
+<app-footer-simple></app-footer-simple>

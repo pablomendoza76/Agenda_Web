@@ -13,8 +13,8 @@ import { RegistroNegocioService } from '../../registro-negocio.service';
 export class Paso4Component {
 
   form = {
-    clase: '',
-    contabilidad: '',
+    clase: 'otros',          // ← valor por defecto
+    contabilidad: 'no',      // ← valor por defecto
     resolucion: '',
     codigoArtesano: ''
   };
@@ -25,7 +25,19 @@ export class Paso4Component {
 
   ngOnInit() {
     const saved = this.registro.getDato('paso4');
-    if (saved) this.form = { ...this.form, ...saved };
+
+    if (saved) {
+      // Si había guardados, se respetan
+      this.form = {
+        clase: saved.clase || 'otros',
+        contabilidad: saved.contabilidad || 'no',
+        resolucion: saved.resolucion || '',
+        codigoArtesano: saved.codigoArtesano || ''
+      };
+    }
+
+    // Emitir por si necesitas mantener sincronía
+    this.paso4Change.emit(this.form);
   }
 
   seleccionarClase(valor: string) {
