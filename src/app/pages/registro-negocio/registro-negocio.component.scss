@@ -4,15 +4,15 @@
 /* CONTENEDOR DEL HEADER GLOBAL */
 .header-wrapper {
   position: relative;
-  max-width: 1080px;
-  margin: 6rem auto 3rem auto;
-  padding: 0 1rem;
+  max-width: 100%;
+  margin: 6rem auto -1rem auto;
+  padding: 0 0rem;
 }
 
 /* HEADER GLOBAL */
 .header-global {
   background: #f7f7f7;
-  padding: 2rem 2.8rem;
+  padding: 2rem 2rem;
   border-radius: 18px;
 
   display: flex;
@@ -37,54 +37,61 @@
 
 /* HEADER DEL PASO */
 .paso-header {
-  max-width: 1080px;
-  margin: 2rem auto 1rem auto;
-
+  width: 58%;
+  margin: 1rem auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
 
-  .paso-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+/* IZQUIERDA: info del paso */
+.paso-info {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  flex: 1 1 auto;
+  min-width: 0;
 
-    .titulo-paso {
-      font-family: $font-work-sans;
-      font-size: 1.65rem;
-      font-weight: 600;
-      color: $texto-principal;
-    }
-
-    .subtitulo-paso {
-      font-family: $font-work-sans;
-      font-size: 1rem;
-      color: $texto-secundario;
-    }
+  .titulo-paso {
+    font-family: $font-work-sans;
+    font-size: 1.65rem;
+    font-weight: 600;
+    color: $texto-principal;
   }
 
-  .progreso {
-    width: 58px;
-    height: 58px;
+  .subtitulo-paso {
+    font-family: $font-work-sans;
+    font-size: 1rem;
+    color: $texto-secundario;
+  }
+}
+
+/* DERECHA: progreso */
+.progreso {
+  /* 🔥 NO uses % aquí, esto rompe en tablets */
+  width: 60px;
+  height: 60px;
+  flex: 0 0 60px;     /* no crece, no se encoge */
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    width: 80%;
+    height: 80%;
     border-radius: 50%;
+    background: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #22c6a3;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    span {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: white;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #22c6a3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
   }
 }
+
+
 
 /* BOTONES DE ACCIÓN */
 .acciones {
@@ -236,7 +243,7 @@
 @media (max-width: 1024px) {
 
   .header-wrapper {
-    margin: 4rem auto 1.5rem auto;
+    margin: 8rem auto 1.5rem auto;
     padding: 0 1rem;
   }
 
@@ -397,3 +404,17 @@
 }
 
 
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.contenedor-page {
+  min-height: calc(100vh - 1px); /* Ajusta si tu footer es más alto */
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-fix {
+  margin-top: auto;
+}

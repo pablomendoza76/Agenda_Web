@@ -3,7 +3,6 @@
 
 .paso3-container {
   background: $fondo-claro;
-  padding: 2rem 2.4rem;
   border-radius: 14px;
   max-width: 55%;
   margin: 0 auto;
@@ -170,11 +169,13 @@
    DROPDOWNS CON SCROLL INTERNO
    =============================== */
     .dropdown-options {
+      list-style: none;  
       max-height: 10rem;
       /* altura máxima */
       overflow-y: auto;
       /* scroll vertical */
       overflow-x: hidden;
+       margin: 0; 
       padding-right: 4px;
       /* evita que tape el scroll */
       position: absolute;
@@ -185,11 +186,20 @@
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       z-index: 20;
+      padding: 0.35rem 0;
+
+      li {
+    &:hover {
+      background: lighten($gris-borde, 18%);
+    }
+  }
     }
 
     /* Scroll estilizado (opcional) */
     .dropdown-options::-webkit-scrollbar {
       width: 6px;
+
+      
     }
 
     .dropdown-options::-webkit-scrollbar-thumb {
@@ -208,6 +218,7 @@
       padding: 0.85rem 1rem;
       cursor: pointer;
     }
+    
 
   }
 }
@@ -225,7 +236,7 @@
 
   .paso3-container .input,
   .paso3-container .dropdown {
-    width: 88% !important; 
+    width: 88% !important;
     margin: 0 auto;
     height: 42px;
   }

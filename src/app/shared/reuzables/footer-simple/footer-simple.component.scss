@@ -1,9 +1,7 @@
 @use '../../catalogo/colores' as *;
 @use '../../catalogo/tipografia' as *;
 
-/* ===================================================== */
-/*                     FOOTER GLOBAL                     */
-/* ===================================================== */
+/*  FOOTER GLOBAL  */
 
 .footer {
   width: 100%;
@@ -46,16 +44,12 @@
     }
   }
 
-  /* ===================================================== */
-  /*                     RESPONSIVE TABLET                 */
-  /* ===================================================== */
+  /*  RESPONSIVE TABLET                 */
   @media (max-width: 992px) {
     padding: 1.2rem 2rem;
   }
 
-  /* ===================================================== */
-  /*                     RESPONSIVE MÓVIL                  */
-  /* ===================================================== */
+  /*  RESPONSIVE MÓVIL                  */
   @media (max-width: 768px) {
     padding: 1.1rem 1.5rem;
     flex-direction: column;

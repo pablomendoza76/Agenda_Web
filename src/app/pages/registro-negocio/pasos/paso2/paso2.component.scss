@@ -5,7 +5,7 @@
   background: $fondo-claro;
   padding: 0rem 2.4rem;
   border-radius: 14px;
-  max-width: 57%;
+  max-width: 55%;
   margin: 0 auto;
   font-family: $font-work-sans;
   display: flex;
@@ -40,42 +40,80 @@
     }
 
     .dropdown {
-      width: 95%;
-      height: 45px;
-      padding: 0 1rem;
-      border: 1.6px solid $gris-borde;
-      border-radius: 10px;
-      background: #fff;
+  width: 95%;
+  height: 45px;
+  padding: 0 1rem;
+  border: 1.6px solid $gris-borde;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  /* Hover general del input */
+  &:hover {
+    border-color: darken($gris-borde, 12%);
+  }
+
+  /* Estado abierto */
+  &.open {
+    border-color: darken($gris-borde, 18%);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.06);
+
+    /* ICONO FLECHA (rota al abrir) */
+    i {
+      transform: rotate(180deg);
+    }
+  }
+
+  .dropdown-selected {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: $texto-principal;
+
+    /* ICONO CHEVRON */
+    i {
+      font-size: 0.7rem;
+      color: $gris-texto;
+      transition: transform 0.25s ease;
+    }
+  }
+
+  .dropdown-options {
+    position: absolute;
+     list-style: none;  
+    top: 100%;              /* PEGADO al input */
+    left: 0;
+    width: 100%;            /* mismo ancho exacto */
+    margin-top: 4px;        /* separación mínima elegante */
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid $gris-borde;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+    z-index: 30;
+    padding: 0.35rem 0;
+    animation: dropdownFade 0.18s ease-out;
+
+    li {
+      padding: 0.75rem 1rem;
       cursor: pointer;
-      position: relative;
-      display: flex;
-      align-items: center;
+      font-size: 0.93rem;
+      color: $texto-principal;
+      transition: background 0.15s ease;
 
-      .dropdown-selected {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .dropdown-options {
-        position: absolute;
-        top: calc(100% + 4px);
-        left: 0;
-        width: 93%;
-        border-radius: 10px;
-        background: #fff;
-        border: 1px solid $gris-borde;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-        z-index: 20;
-
-        li {
-          padding: 0.85rem 1rem;
-          cursor: pointer;
-          font-size: 0.93rem;
-        }
+      /* Hover EXACTO como la imagen */
+      &:hover {
+        background: lighten($gris-borde, 18%);
       }
     }
+  }
+}
+
 
     .logo-dropzone {
       background: #fafafa;
@@ -122,7 +160,6 @@
         li {
           font-size: 0.9rem;
           line-height: 1.4;
-          color: $texto-principal;
         }
       }
     }

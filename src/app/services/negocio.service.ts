@@ -92,5 +92,23 @@ verificarDisponibilidadSubdominio(subdominio: string) {
   );
 }
 
+/** CAMBIAR CLAVE
+ * PATCH → /bill-auth/cambiar-clave
+ */
+cambiarClave(claveActual: string, claveNueva: string) {
+
+  const url = `${environment.apiUrl}bill-auth/cambiar-clave`;
+
+  const payload = {
+    claveActual,
+    claveNueva
+  };
+
+  return this.http.patch<any>(url, payload, this.getHeadersPrivados()).pipe(
+    map(resp => resp),
+    catchError(err => of(err))
+  );
+}
+
 
 }

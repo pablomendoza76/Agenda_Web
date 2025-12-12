@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { switchMap, map, tap } from 'rxjs/operators';
-import { Observable, from } from 'rxjs';
+import { switchMap, map, tap, catchError } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
 
 import { NegocioService } from '../services/negocio.service';
 import { UsuarioService } from '../services/usuario.service';
@@ -165,6 +165,22 @@ obtenerCantones(provinciaId: number): Observable<any[]> {
         raw: resp
       };
     })
+  );
+}
+
+/**
+ * CAMBIAR LA CLAVE DEL ADMIN
+ * Este método se conecta con NegocioService.cambiarClave()
+ * y devuelve la respuesta lista para el componente final.
+ */
+cambiarClaveAdmin(claveActual: string, claveNueva: string): Observable<any> {
+  return this.negocioService.cambiarClave(claveActual, claveNueva).pipe(
+    map(resp => resp?.respuesta ?? resp),
+    catchError(err => of({
+      ok: false,
+      mensaje: 'Error al cambiar la clave',
+      error: err
+    }))
   );
 }
 

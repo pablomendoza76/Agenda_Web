@@ -17,7 +17,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 export class Paso5Component {
 
   subdominio = '';
-  urlPreview = 'https://.agendasoft.com';
+  urlPreview = 'https://.billagenda.com';
 
   estadoSubdominio: 'vacio' | 'validando' | 'disponible' | 'ocupado' = 'vacio';
 
@@ -62,7 +62,7 @@ export class Paso5Component {
       .replace(/[^a-z0-9-]/g, '');
 
     this.subdominio = limpio;
-    this.urlPreview = `https://${limpio}.agendasoft.com`;
+    this.urlPreview = `https://${limpio}.billagenda.com`;
 
     this.registroService.setDato('subdominio', limpio);
     this.subdominioChange.emit(limpio);

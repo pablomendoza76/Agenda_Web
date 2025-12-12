@@ -317,3 +317,64 @@
     height: 270px !important;
   }
 }
+
+@media (max-width: 768px) {
+
+  /* ===============================
+     RESET REAL DE ESPACIADO
+  =============================== */
+
+  .hero-section {
+    padding-top: 2.5rem !important; /* ↓ antes 5rem */
+  }
+
+  /* Quitar márgenes heredados */
+  .hero-texto h1,
+  .hero-texto p {
+    margin: 0 !important;
+  }
+
+  /* ORDEN GRID (se mantiene) */
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "titulo"
+      "subtitulo"
+      "imagenes"
+      "botones";
+    gap: 0;
+  }
+
+  .hero-texto {
+    display: contents;
+  }
+
+  /* ========= TÍTULO ========= */
+  .hero-texto .titulo {
+    grid-area: titulo;
+    text-align: center;
+    margin-bottom: 0px !important; /* ≈ 0.2cm */
+    line-height: 1.15 !important;  /* ↓ clave */
+  }
+
+  /* ========= SUBTÍTULO ========= */
+  .hero-texto .subtitulo {
+    grid-area: subtitulo;
+    text-align: center;
+    margin-bottom: 0px !important; /* ≈ 0.2cm */
+    line-height: 1.45 !important;  /* ↓ clave */
+  }
+
+  /* ========= CARRUSEL ========= */
+  .hero-imagenes {
+    grid-area: imagenes;
+    margin: 8px auto 8px !important; /* ≈ 0.2cm */
+  }
+
+  /* ========= BOTONES ========= */
+  .hero-botones {
+    grid-area: botones;
+    margin-top: 8px !important;
+  }
+}

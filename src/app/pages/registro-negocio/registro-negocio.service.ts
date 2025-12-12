@@ -5,9 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class RegistroNegocioService {
 
-  /* ==========================================================
-     ESTRUCTURA COMPLETA DE LOS DATOS DEL REGISTRO
-  ========================================================== */
+  /*ESTRUCTURA COMPLETA DE LOS DATOS DEL REGISTRO*/
   private datos: any = {
     plan: null,             // paso 1
     infoNegocio: {},        // paso 2
@@ -17,9 +15,7 @@ export class RegistroNegocioService {
     subdominio: null        // paso 5
   };
 
-  /* ==========================================================
-     GUARDAR DATO GENÉRICO
-  ========================================================== */
+  /*GUARDAR DATO GENÉRICO*/
   setDato(key: string, value: any) {
     this.datos[key] = value;
 
@@ -27,23 +23,17 @@ export class RegistroNegocioService {
     console.log('📦 Estado actual del registro:', this.datos);
   }
 
-  /* ==========================================================
-     OBTENER DATO
-  ========================================================== */
+  /*OBTENER DATO*/
   getDato(key: string) {
     return this.datos[key];
   }
 
-  /* ==========================================================
-     OBTENER TODO EL OBJETO SIN PROCESAR
-  ========================================================== */
+  /*OBTENER TODO EL OBJETO SIN PROCESAR*/
   getAll() {
     return this.datos;
   }
 
-  /* ==========================================================
-     OBJETO FINAL COMPILADO (LISTO PARA API)
-  ========================================================== */
+  /*OBJETO FINAL COMPILADO (LISTO PARA API)*/
   getTodo() {
     return {
       plan: this.datos.plan,

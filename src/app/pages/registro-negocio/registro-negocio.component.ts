@@ -49,18 +49,18 @@ export class RegistroNegocioComponent {
 
   titulosPaso: Record<number, string> = {
     1: 'Selecciona tu plan',
-    2: 'Información de tu negocio',
-    3: 'Configura tu horario de atención',
-    4: 'Agrega los servicios que ofreces',
-    5: 'Confirma tu información'
+    2: 'Información principal del negocio',
+    3: 'Contacto y ubicación',
+    4: 'Información adicional',
+    5: 'Subdominio personalizado'
   };
 
   subtitulosPaso: Record<number, string> = {
-    1: 'Elige el plan que mejor se adapte a las necesidades de tu negocio.',
-    2: 'Completa la información básica de tu negocio.',
-    3: 'Define tus horarios disponibles para recibir citas.',
-    4: 'Añade los servicios que tu negocio ofrece.',
-    5: 'Revisa y confirma toda la información antes de finalizar.'
+    1: 'Elige el plan que mejor se adapte a las necesidades de tu negocio. Siempre puedes cambiar más adelante.',
+    2: 'Proporciona los datos básicos y legales de tu negocio.',
+    3: 'Información de contacto y ubicación de tu negocio.',
+    4: 'Detalles adicionales para completar tu configuración.',
+    5: 'Elige una dirección web única para tu negocio. Tus clientes podrán acceder fácilmente a tu sistema de citas.'
   };
 
   get tituloPasoActual() {
@@ -82,7 +82,7 @@ export class RegistroNegocioComponent {
   puedeContinuar(): boolean {
 
     if (this.pasoActual === 1) {
-      return this.registroService.getDato('plan') !== null;
+      return this.registroService.getDato('planId') !== null;
     }
 
     if (this.pasoActual === 2) {
@@ -149,47 +149,52 @@ export class RegistroNegocioComponent {
     if (this.pasoActual > 1) this.pasoActual--;
   }
 
-  /* ============================================================
-     CREAR NEGOCIO FINAL
-  ============================================================ */
+  /* CREAR NEGOCIO FINAL*/
   crearNegocio() {
 
-    this.cargando = true;
+  this.cargando = true;
 
-    const data = this.registroService.getTodo();
+  const data = this.registroService.getTodo();
 
-    const datosNegocio = {
-      tipoNegocioId: data.infoNegocio?.tipoNegocioId,
-      ruc: data.infoNegocio?.ruc,
-      razonSocial: data.infoNegocio?.razonSocial,
-      nombreComercial: data.infoNegocio?.nombreComercial,
-      subdominio: data.subdominio ?? null,
-      logo: data.infoNegocio?.logoUrl ?? null
-    };
+  const datosNegocio = {
+    tipoNegocioId: data.infoNegocio?.tipoNegocioId,
+    ruc: data.infoNegocio?.ruc,
+    razonSocial: data.infoNegocio?.razonSocial,
+    nombreComercial: data.infoNegocio?.nombreComercial,
+    subdominio: data.subdominio ?? null,
+    logo: data.infoNegocio?.logoUrl ?? null
+  };
 
-    const datosUsuario = {
-      identificacion: data.contacto?.identificacion,
-      nombres: data.contacto?.nombres,
-      apellidos: data.contacto?.apellidos,
-      correo: data.contacto?.correo,
-      celular: data.contacto?.celular,
-      direccion: data.contacto?.direccion,
-      img: data.contacto?.imgUrl ?? null,
-      alias: data.contacto?.alias,
-      cargoId: 1,
-      estado: 1
-    };
+  const datosUsuario = {
+    identificacion: data.contacto?.identificacion,
+    nombres: data.contacto?.nombres,
+    apellidos: data.contacto?.apellidos,
+    correo: data.contacto?.correo,
+    celular: data.contacto?.celular,
+    direccion: data.contacto?.direccion,
+    img: data.contacto?.imgUrl ?? null,
+    alias: data.contacto?.alias,
+    cargoId: 1,
+    estado: 1
+  };
 
-    this.negocioMapper.registrarNegocioYUsuario(datosNegocio, datosUsuario)
-      .subscribe({
-        next: () => {
-          this.cargando = false;
-          this.negocioCreado = true;
-        },
-        error: () => {
-          this.cargando = false;
-          this.alert.error('Error al crear el negocio. Intenta nuevamente.', 'Error');
-        }
-      });
-  }
+  this.negocioMapper.registrarNegocioYUsuario(datosNegocio, datosUsuario)
+    .subscribe({
+      next: () => {
+        
+        // Guardamos RUC y correo para el cambio de clave
+        this.registroService.setDato('credencialesTemp', {
+          email: datosUsuario.correo,
+          claveActual: datosNegocio.ruc  // EL RUC ES LA CONTRASEÑA TEMPORAL
+        });
+
+        this.cargando = false;
+        this.negocioCreado = true;
+      },
+      error: () => {
+        this.cargando = false;
+        this.alert.error('Error al crear el negocio. Intenta nuevamente.', 'Error');
+      }
+    });
+}
 }

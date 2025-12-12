@@ -1,9 +1,13 @@
 <section class="precios-section">
+  <!-- Fondo -->
   <div class="precios-bg">
     <img src="/img/fondo-puntos.svg" alt="Fondo puntos" />
   </div>
 
+  <!-- Contenedor -->
   <div class="precios-container">
+
+    <!-- Header -->
     <div class="precios-header">
       <h2 class="h2-semibold titulo">Planes y precios</h2>
       <p class="body-large-regular subtitulo">
@@ -11,37 +15,103 @@
       </p>
     </div>
 
+    <!-- Grid -->
     <div class="planes-grid">
-      <!-- Plan Free -->
-      <div class="plan-card plan-free">
-        <div class="plan-header">
-          <span class="plan-nombre">Plan Free</span>
-          <h3 class="plan-precio">Gratis</h3>
+
+      <div
+        class="plan-card"
+        *ngFor="let plan of planes; trackBy: trackByPlanId"
+        [ngClass]="{
+          'plan-pro': plan.idPlan === 2,
+          'plan-free': plan.idPlan !== 2
+        }"
+      >
+
+        <!-- Badge SOLO para Pro -->
+        <div class="badge" *ngIf="plan.idPlan === 2">
+          Recomendado
         </div>
+
+        <!-- Header -->
+        <div class="plan-header">
+          <span
+            class="plan-nombre"
+            [class.verde]="plan.idPlan === 2"
+          >
+            {{ plan.nombre }}
+          </span>
+
+          <h3 class="plan-precio">
+            {{ plan.idPlan === 1 ? 'Gratis' : ('$ ' + plan.precio) }}
+            <span *ngIf="plan.idPlan === 2">/mes</span>
+          </h3>
+
+          <!-- Descripción -->
+          <p class="plan-descripcion" *ngIf="plan.descripcion">
+            {{ plan.descripcion }}
+          </p>
+        </div>
+
         <hr />
+
+        <!-- Lista dinámica -->
         <ul class="plan-lista">
-          <li><i class="fa-regular fa-circle-check"></i> Agenda básica</li>
-          <li><i class="fa-regular fa-circle-check"></i> Hasta 1 usuario</li>
-          <li><i class="fa-regular fa-circle-check"></i> Clientes ilimitados</li>
+
+          <li *ngIf="plan.gestionCitasBasico">
+            <i class="fa-regular fa-circle-check"></i>
+            Gestión básica de citas
+          </li>
+
+          <li>
+            <i class="fa-regular fa-circle-check"></i>
+            Hasta {{ plan.usuariosMax }}
+            usuario{{ plan.usuariosMax > 1 ? 's' : '' }}
+          </li>
+
+          <li>
+            <i class="fa-regular fa-circle-check"></i>
+            {{ plan.citasMensualesMax }} citas mensuales
+          </li>
+
+          <li *ngIf="plan.recordatoriosCorreo">
+            <i class="fa-regular fa-circle-check"></i>
+            Recordatorios por correo
+          </li>
+
+          <li *ngIf="plan.recordatoriosWhatsapp">
+            <i class="fa-regular fa-circle-check"></i>
+            Recordatorios por WhatsApp
+          </li>
+
+          <li *ngIf="plan.gestionPersonalServicios">
+            <i class="fa-regular fa-circle-check"></i>
+            Gestión de personal y servicios
+          </li>
+
+          <li *ngIf="plan.reportesDetallados">
+            <i class="fa-regular fa-circle-check"></i>
+            Reportes detallados
+          </li>
+
+          <li *ngIf="plan.integracionExterna">
+            <i class="fa-regular fa-circle-check"></i>
+            Integraciones externas
+          </li>
+
         </ul>
-        <button class="btn-free">Empezar Gratis</button>
+
+        <!-- Botón -->
+        <button
+          type="button"
+          [class.btn-pro]="plan.idPlan === 2"
+          [class.btn-free]="plan.idPlan !== 2"
+          (click)="seleccionarPlan(plan)"
+        >
+          {{ plan.idPlan === 1 ? 'Empezar Gratis' : 'Obtener plan' }}
+        </button>
+
       </div>
 
-      <!-- Plan Pro -->
-      <div class="plan-card plan-pro">
-        <div class="badge">Recomendado</div>
-        <div class="plan-header">
-          <span class="plan-nombre verde">Plan Pro</span>
-          <h3 class="plan-precio">$ 29.00 <span>/mes</span></h3>
-        </div>
-        <hr />
-        <ul class="plan-lista">
-          <li><i class="fa-regular fa-circle-check"></i> Todo el Free +</li>
-          <li><i class="fa-regular fa-circle-check"></i> Reportes y estadísticas</li>
-          <li><i class="fa-regular fa-circle-check"></i> Gestión de personal y servicios</li>
-        </ul>
-        <button class="btn-pro">Obtener plan</button>
-      </div>
     </div>
   </div>
 </section>

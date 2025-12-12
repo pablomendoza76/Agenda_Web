@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { RegistroNegocioService } from '../../registro-negocio.service';
 import { AlertService } from '../../../../services/alert.service';
+import { PlanesService } from '../../../../services/planes.service';
+import { Plan } from '../../../../interfaces/plan.interface';
+import { PlanStore } from '../../../../services/plan-store.service';
 
 @Component({
   selector: 'app-paso1',
@@ -12,57 +15,67 @@ import { AlertService } from '../../../../services/alert.service';
 })
 export class Paso1Component implements OnInit {
 
-  /** Valor actual seleccionado */
-  selectedPlan: 'starter' | 'pro' | null = null;
+  /** Lista de planes */
+  planes: Plan[] = [];
 
-  /** Emitimos al padre cuando se selecciona un plan */
-  @Output() planSeleccionado = new EventEmitter<'starter' | 'pro'>();
+  /** ID seleccionado */
+  selectedPlanId: number | null = null;
+
+  /** 👉 ESTE ES EL QUE USA EL HTML */
+  planSeleccionado: Plan | null = null;
+
+  /** 👉 SOLO para emitir al padre (NO se usa en HTML) */
+  @Output() planSeleccionadoChange = new EventEmitter<number>();
 
   constructor(
     private registroService: RegistroNegocioService,
-    private alert: AlertService       // <-- Inyectamos alert service
+    private planesService: PlanesService,
+    private planStore: PlanStore,
+    private alert: AlertService
   ) {}
 
-  /** Recuperamos el plan guardado al entrar al paso */
   ngOnInit(): void {
-    const planGuardado = this.registroService.getDato('plan');
-    if (planGuardado) {
-      this.selectedPlan = planGuardado;
-    }
+    // cargar plan desde store
+    this.planStore.cargarDesdeStorage();
+    const planIdGuardado = this.planStore.getPlanSeleccionado();
+
+    this.planesService.listarPlanes().subscribe({
+      next: (resp: any) => {
+        const datos: Plan[] = resp?.respuesta?.datos || [];
+
+        // ordenar: free primero
+        this.planes = datos.sort(
+          (a: Plan, b: Plan) => Number(a.precio) - Number(b.precio)
+        );
+
+        // restaurar selección si existe
+        if (planIdGuardado) {
+          const plan = this.planes.find(p => p.idPlan === planIdGuardado);
+          if (plan) {
+            this.selectedPlanId = plan.idPlan;
+            this.planSeleccionado = plan;
+            this.registroService.setDato('planId', plan.idPlan);
+          }
+        }
+      }
+    });
   }
 
-  /** Método para seleccionar un plan */
-  seleccionarPlan(plan: 'starter' | 'pro') {
-    this.selectedPlan = plan;
+  seleccionarPlan(plan: Plan): void {
+    this.selectedPlanId = plan.idPlan;
+    this.planSeleccionado = plan;
 
-    // Guardamos en el servicio global
-    this.registroService.setDato('plan', plan);
+    // guardar en stores
+    this.planStore.setPlanSeleccionado(plan.idPlan);
+    this.registroService.setDato('planId', plan.idPlan);
 
-    // Emitimos al padre
-    this.planSeleccionado.emit(plan);
+    // emitir al padre
+    this.planSeleccionadoChange.emit(plan.idPlan);
 
-    // MANDAMOS ALERT
-    const nombres = {
-      starter: 'Starter',
-      pro: 'Pro'
-    };
-
+    // alerta
     this.alert.success(
-      `Has seleccionado el plan ${nombres[plan]}`,
+      `Has seleccionado el plan ${plan.nombre}`,
       'Plan actualizado'
     );
-  }
-
-  /** Getters de estado */
-  get esEstadoInicial(): boolean {
-    return this.selectedPlan === null;
-  }
-
-  get starterActivo(): boolean {
-    return this.selectedPlan === 'starter';
-  }
-
-  get proActivo(): boolean {
-    return this.selectedPlan === 'pro';
   }
 }

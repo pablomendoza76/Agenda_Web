@@ -7,7 +7,6 @@
   padding: 5rem 2rem;
   overflow: hidden;
 
-  /* === FONDO REAL === */
   .precios-bg {
     position: absolute;
     inset: 0;
@@ -17,15 +16,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 1;
-      mix-blend-mode: normal;
-      filter: none;
       pointer-events: none;
       user-select: none;
     }
   }
 
-  /* === CONTENIDO === */
   .precios-container {
     position: relative;
     z-index: 2;
@@ -34,11 +29,10 @@
     text-align: center;
 
     .precios-header {
-      margin-bottom: 2.2rem;
+      margin-bottom: 2.4rem;
 
       .titulo {
         color: $rojo-botones;
-        margin-bottom: 0.4rem;
         font-size: 2.3rem;
       }
 
@@ -48,136 +42,147 @@
       }
     }
 
-    /* === GRID === */
     .planes-grid {
       display: flex;
       justify-content: center;
-      gap: 1.8rem;
+      gap: 2rem;
       flex-wrap: wrap;
 
       .plan-card {
+        width: 260px;
+        min-height: 470px;
         background: $fondo-claro;
-        border-radius: 18px;
-        padding: 2rem 2rem;
-        width: 250px; /* MÁS DELGADAS */
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
-        transition: box-shadow 0.25s ease, transform 0.25s ease;
+        border-radius: 20px;
+        padding: 2.2rem 2rem;
         text-align: left;
-        border: 1px solid #eee;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.25s ease;
 
-        /* HOVER: NO AFECTA el badge */
-        &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
-        }
+        /* BASE NEUTRA */
+        border: 1.5px solid transparent;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 
-        /* === HEADER === */
         .plan-header {
-          margin-bottom: 0.6rem;
+          min-height: 95px;
 
           .plan-nombre {
             @extend .headline-title-medium;
-            color: $amarillo-texto;
             font-size: 0.9rem;
+            display: block;
           }
 
           .plan-precio {
             @extend .h2-semibold;
-            font-size: 2.2rem;
-            margin: 0.3rem 0 0.3rem 0;
+            font-size: 2.3rem;
             color: $texto-principal;
 
             span {
-              color: $texto-terciario;
               font-size: 0.85rem;
+              color: $texto-terciario;
             }
+          }
+
+          .plan-descripcion {
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            color: $texto-secundario;
           }
         }
 
         hr {
+          margin: 1.2rem 0;
           border: none;
           border-bottom: 1px solid $gris-borde;
-          margin: 1.2rem 0;
         }
 
-        /* === LISTA === */
         .plan-lista {
-          margin: 1rem 0 2rem;
-          padding: 0;
           list-style: none;
+          padding: 0;
+          margin: 0 0 2rem;
+          flex-grow: 1;
 
           li {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.9rem;
+            gap: 0.6rem;
             font-size: 0.9rem;
             color: $texto-secundario;
 
             i {
               color: $rojo-botones;
-              font-size: 0.85rem;
             }
           }
         }
 
-        /* === BOTONES === */
-        .btn-free,
-        .btn-pro {
+        button {
+          margin-top: auto;
           width: 100%;
-          padding: 0.7rem 1rem;
-          border-radius: 20px;
+          padding: 0.75rem 1rem;
+          border-radius: 24px;
           font-size: 0.9rem;
-          font-weight: 500;
           cursor: pointer;
           border: none;
-          transition: 0.25s ease;
+          transition: all 0.25s ease;
         }
 
-        .btn-free {
-          background: transparent;
-          color: $rojo-botones;
-          border: 1px solid $rojo-botones;
+        /* ===== PLAN STARTER (FREE) ===== */
+        &.plan-free {
+          border: 1.5px solid transparent;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+          .plan-nombre {
+            color: $amarillo-texto;
+          }
+
+          button {
+            background: white;
+            border: 1.5px solid $gris-borde;
+            color: $rojo-botones;
+          }
 
           &:hover {
-            background: $rojo-botones;
-            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+
+            button {
+              background: $rojo-botones;
+              color: white;
+              border-color: $rojo-botones;
+            }
           }
         }
 
-        .btn-pro {
-          background: $rojo-botones;
-          color: white;
-
-          &:hover {
-            background: darken($rojo-botones, 10%);
-          }
-        }
-
-        /* === PLAN PRO (destacado) === */
+        /* ===== PLAN PRO ===== */
         &.plan-pro {
           border: 1.5px solid $rojo-botones;
+          box-shadow: 0 12px 32px rgba(220, 38, 38, 0.22);
 
-          .plan-nombre.verde {
+          .plan-nombre {
             color: $verde-éxito;
           }
 
-          /* BADGE FIJO – NO SE MUEVE */
+          button {
+            background: $rojo-botones;
+            color: white;
+          }
+
+          &:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(220, 38, 38, 0.32);
+          }
+
           .badge {
             position: absolute;
-            top: -15px;
-            left: 60%;
+            top: -14px;
+            left: 50%;
             transform: translateX(-50%);
             background: $rojo-botones;
             color: white;
-            padding: 0.25rem 1rem;
+            padding: 0.25rem 1.2rem;
             border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: 500;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-            pointer-events: none; /* evita moverse */
-            z-index: 10;
+            z-index: 5;
           }
         }
       }
@@ -188,6 +193,11 @@
     .planes-grid {
       flex-direction: column;
       align-items: center;
+    }
+
+    .plan-card {
+      max-width: 330px;
+      width: 100%;
     }
   }
 }

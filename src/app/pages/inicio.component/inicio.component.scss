@@ -31,5 +31,36 @@
   margin-top: 5rem;
 }
 
+/* IMPORTANTE:
+   No pongas opacity: 0, porque si no se activa el observer verás blanco.
+   En vez de ocultar, ponemos "ligeramente atenuado" y luego sube a 1.
+*/
+.scroll-section {
+  opacity: 0.35; /* antes: 0 */
+  transform: translateY(18px);
+  filter: blur(1.5px);
 
-  
+  transition:
+    opacity 500ms ease,
+    transform 650ms cubic-bezier(.16,.84,.24,1),
+    filter 650ms ease;
+
+  will-change: transform, opacity, filter;
+}
+
+/* Cuando entra */
+.scroll-section.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Respeta accesibilidad: si el usuario no quiere animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-section {
+    transition: none;
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+}

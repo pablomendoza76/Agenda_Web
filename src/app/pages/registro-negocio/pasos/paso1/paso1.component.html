@@ -4,96 +4,99 @@
   <div class="contenedor-plan">
     <div class="planes">
 
-      <!-- PLAN STARTER -->
+      <!-- PLANES DINÁMICOS -->
       <button
+        *ngFor="let plan of planes"
         type="button"
-        class="plan-card starter"
-        [class.active]="selectedPlan === 'starter'"
-        (click)="seleccionarPlan('starter')"
+        class="plan-card"
+        [class.starter]="plan.precio === 0"
+        [class.pro]="plan.precio !== 0"
+        [class.active]="selectedPlanId === plan.idPlan"
+        [class.recommended-default]="plan.precio !== 0 && selectedPlanId === null"
+        (click)="seleccionarPlan(plan)"
       >
 
         <div class="plan-header">
-          <span class="plan-nombre starter">Plan Starter</span>
+          <span
+            class="plan-nombre"
+            [class.starter]="plan.precio === 0"
+            [class.pro]="plan.precio !== 0"
+          >
+            {{ plan.nombre }}
+          </span>
+
+          <!-- ETIQUETA RECOMENDADO (SOLO PRO) -->
+          <span
+            class="etiqueta-recomendado"
+            *ngIf="plan.precio !== 0"
+          >
+            Recomendado
+          </span>
 
           <span
             class="plan-radio"
-            [class.checked]="selectedPlan === 'starter'"
-          ></span>
-        </div>
-
-        <h3 class="h2-semibold plan-precio">Gratis</h3>
-
-        <hr class="plan-divider" />
-
-        <p class="body-regular descripcion">
-          Ideal para quienes están empezando y necesitan una agenda simple pero funcional.
-        </p>
-
-      </button>
-      <!-- FIN PLAN STARTER -->
-
-
-      <!-- PLAN PRO -->
-      <button
-        type="button"
-        class="plan-card pro"
-        [class.active]="selectedPlan === 'pro'"
-        [class.recommended-default]="selectedPlan === null"
-        (click)="seleccionarPlan('pro')"
-      >
-
-        <div class="plan-header">
-          <span class="plan-nombre pro">Plan Pro</span>
-
-          <span class="etiqueta-recomendado">Recomendado</span>
-
-          <span
-            class="plan-radio"
-            [class.checked]="selectedPlan === 'pro'"
+            [class.checked]="selectedPlanId === plan.idPlan"
           ></span>
         </div>
 
         <h3 class="h2-semibold plan-precio">
-          $ 29.00 <span class="mes">/mes</span>
+          {{ plan.precio === 0 ? 'Gratis' : ('$ ' + plan.precio) }}
+          <span class="mes" *ngIf="plan.precio !== 0">/mes</span>
         </h3>
 
         <hr class="plan-divider" />
 
         <p class="body-regular descripcion">
-          Perfecto para negocios que crecen y requieren más control y personalización.
+          {{ plan.descripcion }}
         </p>
 
       </button>
-      <!-- FIN PLAN PRO -->
+      <!-- FIN PLANES -->
 
     </div>
   </div>
 
-  <!-- DETALLES DEL PLAN STARTER -->
-  <div class="detalles" *ngIf="selectedPlan === 'starter'">
-    <h4 class="headline-title-medium">Plan Starter incluye:</h4>
+  <!-- DETALLES DEL PLAN SELECCIONADO -->
+  <div class="detalles" *ngIf="planSeleccionado">
+
+    <h4 class="headline-title-medium">
+      Plan seleccionado incluye:
+    </h4>
 
     <ul class="detalles-lista">
-      <li><i class="fa-solid fa-check"></i>Agenda básica</li>
-      <li><i class="fa-solid fa-check"></i>1 usuario con acceso completo</li>
-      <li><i class="fa-solid fa-check"></i>Visualización de citas en calendario</li>
-      <li><i class="fa-solid fa-check"></i>50 citas mensuales</li>
-      <li><i class="fa-solid fa-check"></i>Subdominio personalizado</li>
-      <li><i class="fa-solid fa-check"></i>Recordatorios por correo</li>
-    </ul>
-  </div>
+      <li *ngIf="planSeleccionado.gestionCitasBasico">
+        <i class="fa-solid fa-check"></i>Agenda básica
+      </li>
 
-  <!-- DETALLES DEL PLAN PRO -->
-  <div class="detalles" *ngIf="selectedPlan === 'pro'">
-    <h4 class="headline-title-medium">Plan Pro incluye:</h4>
+      <li>
+        <i class="fa-solid fa-check"></i>
+        {{ planSeleccionado.usuariosMax }} usuario(s) con acceso completo
+      </li>
 
-    <ul class="detalles-lista">
-      <li><i class="fa-solid fa-check"></i>Usuarios múltiples con roles asignables</li>
-      <li><i class="fa-solid fa-check"></i>Gestión de personal y servicios</li>
-      <li><i class="fa-solid fa-check"></i>Subdominio personalizado para reservas</li>
-      <li><i class="fa-solid fa-check"></i>Recordatorios automáticos por correo y WhatsApp</li>
-      <li><i class="fa-solid fa-check"></i>Reportes detallados de agendamiento</li>
-      <li><i class="fa-solid fa-check"></i>Integración con sistemas externos</li>
+      <li>
+        <i class="fa-solid fa-check"></i>
+        {{ planSeleccionado.citasMensualesMax }} citas mensuales
+      </li>
+
+      <li *ngIf="planSeleccionado.recordatoriosCorreo">
+        <i class="fa-solid fa-check"></i>Recordatorios por correo
+      </li>
+
+      <li *ngIf="planSeleccionado.recordatoriosWhatsapp">
+        <i class="fa-solid fa-check"></i>Recordatorios por WhatsApp
+      </li>
+
+      <li *ngIf="planSeleccionado.gestionPersonalServicios">
+        <i class="fa-solid fa-check"></i>Gestión de personal y servicios
+      </li>
+
+      <li *ngIf="planSeleccionado.reportesDetallados">
+        <i class="fa-solid fa-check"></i>Reportes detallados
+      </li>
+
+      <li *ngIf="planSeleccionado.integracionExterna">
+        <i class="fa-solid fa-check"></i>Integración con sistemas externos
+      </li>
     </ul>
   </div>
 
